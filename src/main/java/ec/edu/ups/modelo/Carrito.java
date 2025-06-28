@@ -6,6 +6,15 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Carrito {
+    private Usuario usuario;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
     private final double IVA = 0.12;
 
@@ -91,5 +100,19 @@ public class Carrito {
                 ", items=" + items +
                 '}';
     }
+
+    public void eliminarItem(int codigoProducto) {
+        items.removeIf(item -> item.getProducto().getCodigo() == codigoProducto);
+    }
+
+    public void actualizarCantidad(int codigoProducto, int nuevaCantidad) {
+        for (ItemCarrito item : items) {
+            if (item.getProducto().getCodigo() == codigoProducto) {
+                item.setCantidad(nuevaCantidad);
+                break;
+            }
+        }
+    }
+
 }
 

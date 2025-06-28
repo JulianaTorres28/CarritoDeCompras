@@ -1,5 +1,7 @@
 package ec.edu.ups.vista;
 
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,17 +19,17 @@ public class CarritoAnadirView extends JInternalFrame {
     private JButton btnLimpiar;
     private JComboBox cbxCantidad;
     private JPanel panelPrincipal;
+    private MensajeInternacionalizacionHandler mensajeInternacionalizacion;
 
-    public CarritoAnadirView(){
-
+    public CarritoAnadirView(MensajeInternacionalizacionHandler mensajeInternacionalizacion){
         super("Carrito de Compras", true, true, false, true);
+        this.mensajeInternacionalizacion = mensajeInternacionalizacion;
         setContentPane(panelPrincipal);
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
         setSize(500, 500);
 
         DefaultTableModel modelo = new DefaultTableModel();
-        Object[] columnas = {"Codigo", "Nombre", "Precio", "Cantidad", "Subtotal"};
-        modelo.setColumnIdentifiers(columnas);
+        modelo.setColumnIdentifiers(new String[]{"Codigo", "Nombre", "Precio", "Cantidad", "Subtotal"});
         tblProductos.setModel(modelo);
 
         cargarDatos();
@@ -91,6 +93,10 @@ public class CarritoAnadirView extends JInternalFrame {
 
     public JPanel getPanelPrincipal() {
         return panelPrincipal;
+    }
+
+    public MensajeInternacionalizacionHandler getMensajeInternacionalizacion() {
+        return mensajeInternacionalizacion;
     }
 
     public void mostrarMensaje(String mensaje) {

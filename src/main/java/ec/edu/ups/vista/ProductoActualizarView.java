@@ -21,7 +21,7 @@ public class ProductoActualizarView extends JInternalFrame {
 
     public ProductoActualizarView() {
         setContentPane(panelPrincipal);
-        setTitle("Listado de Productos");
+        setTitle("Actualizar Productos");
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
         setSize(500, 500);
         setClosable(true);
