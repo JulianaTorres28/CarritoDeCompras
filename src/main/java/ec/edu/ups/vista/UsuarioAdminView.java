@@ -1,5 +1,6 @@
 package ec.edu.ups.vista;
 
+import ec.edu.ups.modelo.Rol;
 import ec.edu.ups.modelo.Usuario;
 
 import javax.swing.*;
@@ -27,6 +28,24 @@ public class UsuarioAdminView extends JInternalFrame {
         Object[] columnas = {"Username", "Rol"};
         modelo.setColumnIdentifiers(columnas);
         tblUsuarios.setModel(modelo);
+
+        cbxRol.setModel(new DefaultComboBoxModel<>(Rol.values()));
+
+        tblUsuarios.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                int filaSeleccionada = tblUsuarios.getSelectedRow();
+                if (filaSeleccionada >= 0) {
+                    String username = tblUsuarios.getValueAt(filaSeleccionada, 0).toString();
+                    String rol = tblUsuarios.getValueAt(filaSeleccionada, 1).toString();
+
+                    txtusername.setText(username);
+                    cbxRol.setSelectedItem(Rol.valueOf(rol));
+                }
+            }
+        });
+
+
+        setContentPane(panelPrincipal);
     }
 
     public JTable getTblUsuarios() {

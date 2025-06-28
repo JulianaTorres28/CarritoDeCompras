@@ -5,74 +5,46 @@ import ec.edu.ups.modelo.Carrito;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
+import java.util.Locale;
 
 public class CarritoListaView extends JInternalFrame {
+
     private JPanel panelPrincipal;
     private JTable tblCarritos;
     private JButton btnListar;
-    private JScrollPane scrollPane;
     private DefaultTableModel modelo;
 
     public CarritoListaView() {
         setContentPane(panelPrincipal);
-        setTitle("Lista de Carritos");
+        setTitle("Listado de Carritos");
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
-        setSize(500, 500);
+        setSize(600, 500);
         setClosable(true);
         setIconifiable(true);
         setResizable(true);
 
         modelo = new DefaultTableModel();
-        Object[] columnas = {"Código", "Fecha", "Usuario", "Subtotal", "IVA", "Total"};
+        Object[] columnas = {"Código", "Fecha", "Subtotal", "IVA", "Total", "Usuario"};
         modelo.setColumnIdentifiers(columnas);
         tblCarritos.setModel(modelo);
     }
 
-    public void cargarCarritosEnTabla(List<Carrito> carritos) {
+    public JButton getBtnListar() { return btnListar; }
+
+    public JTable getTblCarritos() { return tblCarritos; }
+
+    public void cargarDatos(List<Carrito> listaCarritos, Locale locale) {
         modelo.setRowCount(0);
-        for (Carrito carrito : carritos) {
+
+        for (Carrito c : listaCarritos) {
             modelo.addRow(new Object[]{
-                    carrito.getCodigo(),
-                    carrito.getFechaCreacion().getTime(),
-                    carrito.getUsuario().getUsername(),
-                    carrito.calcularSubtotal(),
-                    carrito.calcularIVA(),
-                    carrito.calcularTotal()
+                    c.getCodigo(),
+                    ec.edu.ups.util.FormateadorUtils.formatearFecha(c.getFechaCreacion().getTime(), locale),
+                    ec.edu.ups.util.FormateadorUtils.formatearMoneda(c.calcularSubtotal(), locale),
+                    ec.edu.ups.util.FormateadorUtils.formatearMoneda(c.calcularIVA(), locale),
+                    ec.edu.ups.util.FormateadorUtils.formatearMoneda(c.calcularTotal(), locale),
+                    c.getUsuario().getUsername()
             });
         }
     }
-
-    public DefaultTableModel getModelo() {
-        return modelo;
-    }
-
-    public JTable getTblCarritos() {
-        return tblCarritos;
-    }
-
-    public JPanel getPanelPrincipal() {
-        return panelPrincipal;
-    }
-
-    public JButton getBtnListar() {
-        return btnListar;
-    }
-    public JScrollPane getScrollPane() {
-        return scrollPane;
-    }
-    public void setScrollPane(JScrollPane scrollPane) {
-        this.scrollPane = scrollPane;
-    }
-    public void setBtnListar(JButton btnListar) {
-        this.btnListar = btnListar;
-    }
-    public void setPanelPrincipal(JPanel panelPrincipal) {
-        this.panelPrincipal = panelPrincipal;
-    }
-
-    public void mostrarMensaje(String mensaje) {
-        JOptionPane.showMessageDialog(this, mensaje);
-    }
-
-
 }

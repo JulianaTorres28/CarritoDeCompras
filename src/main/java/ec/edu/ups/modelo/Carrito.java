@@ -101,11 +101,7 @@ public class Carrito {
                 '}';
     }
 
-    public void eliminarItem(int codigoProducto) {
-        items.removeIf(item -> item.getProducto().getCodigo() == codigoProducto);
-    }
-
-    public void actualizarCantidad(int codigoProducto, int nuevaCantidad) {
+    public void actualizarCantidadProducto(int codigoProducto, int nuevaCantidad) {
         for (ItemCarrito item : items) {
             if (item.getProducto().getCodigo() == codigoProducto) {
                 item.setCantidad(nuevaCantidad);

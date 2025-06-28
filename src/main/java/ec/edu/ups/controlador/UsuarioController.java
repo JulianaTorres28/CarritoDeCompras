@@ -102,9 +102,23 @@ public class UsuarioController {
         return usuario;
     }
 
-    private void buscarUsuarios() {
-        List<Usuario> lista = usuarioDAO.listarTodos();
-        usuarioAdminView.cargarDatos(lista);
+    public void buscarUsuarios() {
+        String username = usuarioAdminView.getTxtusername().getText();
+
+        if (username != null && !username.trim().isEmpty()) {
+            Usuario usuario = usuarioDAO.buscarPorUsername(username);
+            if (usuario != null) {
+                List<Usuario> listaUsuario = List.of(usuario);
+                usuarioAdminView.cargarDatos(listaUsuario);
+            } else {
+                usuarioAdminView.mostrarMensaje("No se encontró el usuario: " + username);
+                List<Usuario> todos = usuarioDAO.listarTodos();
+                usuarioAdminView.cargarDatos(todos);
+            }
+        } else {
+            List<Usuario> lista = usuarioDAO.listarTodos();
+            usuarioAdminView.cargarDatos(lista);
+        }
     }
 
     private void actualizarUsuario() {
@@ -129,17 +143,15 @@ public class UsuarioController {
 
     private void editarUsuario() {
         int fila = usuarioAdminView.getTblUsuarios().getSelectedRow();
-        if (fila == -1) {
-            usuarioAdminView.mostrarMensaje("Selecciona un usuario para editar.");
-            return;
+        if (fila >= 0) {
+            String username = usuarioAdminView.getTblUsuarios().getValueAt(fila, 0).toString();
+            Usuario usuario = usuarioDAO.buscarPorUsername(username);
+            usuarioAdminView.getTxtusername().setText(usuario.getUsername());
+            usuarioAdminView.getTxtcontrasenia().setText(usuario.getContrasenia());
+            usuarioAdminView.getCbxRol().setSelectedItem(usuario.getRol());
+        } else {
+            usuarioAdminView.mostrarMensaje("Seleccione un usuario para editar.");
         }
-        String username = usuarioAdminView.getModelo().getValueAt(fila, 0).toString();
-        String contrasenia = usuarioAdminView.getModelo().getValueAt(fila, 1).toString();
-        Rol rol = Rol.valueOf(usuarioAdminView.getModelo().getValueAt(fila, 2).toString());
-
-        usuarioAdminView.getTxtusername().setText(username);
-        usuarioAdminView.getTxtcontrasenia().setText(contrasenia);
-        usuarioAdminView.getCbxRol().setSelectedItem(rol);
     }
 
 

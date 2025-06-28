@@ -19,6 +19,8 @@ public class CarritoAnadirView extends JInternalFrame {
     private JButton btnLimpiar;
     private JComboBox cbxCantidad;
     private JPanel panelPrincipal;
+    private JButton btnEliminarItem;
+    private JButton btnActualizarCantidad;
     private MensajeInternacionalizacionHandler mensajeInternacionalizacion;
 
     public CarritoAnadirView(MensajeInternacionalizacionHandler mensajeInternacionalizacion){
@@ -94,6 +96,14 @@ public class CarritoAnadirView extends JInternalFrame {
     public JPanel getPanelPrincipal() {
         return panelPrincipal;
     }
+
+    public JButton getBtnEliminarItem() {return btnEliminarItem;}
+
+    public void setBtnEliminarItem(JButton btnEliminarItem) {this.btnEliminarItem = btnEliminarItem;}
+
+    public JButton getBtnActualizarCantidad() {return btnActualizarCantidad;}
+
+    public void setBtnActualizarCantidad(JButton btnActualizarCantidad) {this.btnActualizarCantidad = btnActualizarCantidad;}
 
     public MensajeInternacionalizacionHandler getMensajeInternacionalizacion() {
         return mensajeInternacionalizacion;
