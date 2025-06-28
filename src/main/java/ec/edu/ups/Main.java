@@ -131,8 +131,15 @@ public class Main {
                             principalView.dispose();
                             LoginView newLoginView = new LoginView();
                             UsuarioRegistroView newRegistroView = new UsuarioRegistroView();
-                            new UsuarioController(usuarioDAO, newLoginView, newRegistroView, usuarioAdminView);
+                            UsuarioAdminView newAdminView = new UsuarioAdminView();
+
+                            new UsuarioController(usuarioDAO, newLoginView, newRegistroView, newAdminView);
+
                             newLoginView.setVisible(true);
+                        });
+
+                        principalView.getMenuItemSalir().addActionListener(ev -> {
+                            System.exit(0);
                         });
 
                         principalView.getMenuItemIdiomaEspanol().addActionListener(ev ->
