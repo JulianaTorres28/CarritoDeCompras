@@ -13,6 +13,7 @@ import java.util.List;
 
 public class UsuarioController {
 
+    private Usuario usuarioAutenticado;
     private Usuario usuario;
     private final UsuarioDAO usuarioDAO;
     private final LoginView loginView;
@@ -155,4 +156,7 @@ public class UsuarioController {
     }
 
 
+    public void setUsuarioAutenticado(Usuario usuario) {
+        this.usuarioAutenticado = usuario;
+    }
 }

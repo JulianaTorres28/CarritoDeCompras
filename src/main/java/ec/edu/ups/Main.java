@@ -21,10 +21,12 @@ public class Main {
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(() -> {
 
+            MensajeInternacionalizacionHandler mensajeHandler = new MensajeInternacionalizacionHandler("es", "EC");
+
             UsuarioDAO usuarioDAO = new UsuarioDAOMemoria();
-            LoginView loginView = new LoginView();
-            UsuarioRegistroView usuarioRegistroView = new UsuarioRegistroView();
-            UsuarioAdminView usuarioAdminView = new UsuarioAdminView();
+            LoginView loginView = new LoginView(mensajeHandler);
+            UsuarioRegistroView usuarioRegistroView = new UsuarioRegistroView(mensajeHandler);
+            UsuarioAdminView usuarioAdminView = new UsuarioAdminView(mensajeHandler);
 
             UsuarioController usuarioController = new UsuarioController(
                     usuarioDAO,
@@ -42,7 +44,6 @@ public class Main {
                     Usuario usuarioAutenticado = usuarioController.getUsuarioAutenticado();
                     if (usuarioAutenticado != null) {
 
-                        MensajeInternacionalizacionHandler mensajeHandler = new MensajeInternacionalizacionHandler("es", "EC");
 
                         ProductoDAO productoDAO = new ProductoDAOMemoria();
                         CarritoDAO carritoDAO = new CarritoDAOMemoria();
@@ -128,14 +129,12 @@ public class Main {
                         });
 
                         principalView.getMenuItemCerrarSesion().addActionListener(ev -> {
-                            principalView.dispose();
-                            LoginView newLoginView = new LoginView();
-                            UsuarioRegistroView newRegistroView = new UsuarioRegistroView();
-                            UsuarioAdminView newAdminView = new UsuarioAdminView();
+                            principalView.setVisible(false);
 
-                            new UsuarioController(usuarioDAO, newLoginView, newRegistroView, newAdminView);
+                            usuarioController.setUsuarioAutenticado(null);
 
-                            newLoginView.setVisible(true);
+                            loginView.limpiarCampos();
+                            loginView.setVisible(true);
                         });
 
                         principalView.getMenuItemSalir().addActionListener(ev -> {

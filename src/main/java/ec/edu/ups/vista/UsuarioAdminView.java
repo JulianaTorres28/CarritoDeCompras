@@ -2,12 +2,15 @@ package ec.edu.ups.vista;
 
 import ec.edu.ups.modelo.Rol;
 import ec.edu.ups.modelo.Usuario;
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
 public class UsuarioAdminView extends JInternalFrame {
+    private MensajeInternacionalizacionHandler mensajeInternacionalizacionHandler;
+
     private JPanel panelPrincipal;
     private JTable tblUsuarios;
     private JComboBox cbxRol;
@@ -19,13 +22,28 @@ public class UsuarioAdminView extends JInternalFrame {
     private JTextField txtusername;
     private DefaultTableModel modelo;
 
-    public UsuarioAdminView(){
-        super("Administrar Usuarios", true, true, true, true);
+    public UsuarioAdminView(MensajeInternacionalizacionHandler mensajeInternacionalizacionHandler){
+        super("", true, true, true, true);
+        this.mensajeInternacionalizacionHandler = mensajeInternacionalizacionHandler;
+
+        btnEditar = new JButton();
+        btnBuscar = new JButton();
+        btnActualizar = new JButton();
+        btnEliminar = new JButton();
+
+        initComponents();
+        actualizarTextos();
+    }
+
+    private void initComponents() {
         setSize(600, 400);
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
 
         modelo = new DefaultTableModel();
-        Object[] columnas = {"Username", "Rol"};
+        Object[] columnas = {
+                mensajeInternacionalizacionHandler.get("usuario.admin.tabla.username"),
+                mensajeInternacionalizacionHandler.get("usuario.admin.tabla.rol")
+        };
         modelo.setColumnIdentifiers(columnas);
         tblUsuarios.setModel(modelo);
 
@@ -44,9 +62,27 @@ public class UsuarioAdminView extends JInternalFrame {
             }
         });
 
-
         setContentPane(panelPrincipal);
     }
+
+    private void actualizarTextos() {
+        setTitle(mensajeInternacionalizacionHandler.get("usuario.admin.titulo"));
+        btnBuscar.setText(mensajeInternacionalizacionHandler.get("usuario.admin.boton.buscar"));
+        btnActualizar.setText(mensajeInternacionalizacionHandler.get("usuario.admin.boton.actualizar"));
+        btnEditar.setText(mensajeInternacionalizacionHandler.get("usuario.admin.boton.editar"));
+        btnEliminar.setText(mensajeInternacionalizacionHandler.get("usuario.admin.boton.eliminar"));
+
+        // Actualizar encabezados de la tabla
+        modelo.setColumnIdentifiers(new Object[]{
+                mensajeInternacionalizacionHandler.get("usuario.admin.tabla.username"),
+                mensajeInternacionalizacionHandler.get("usuario.admin.tabla.rol")
+        });
+    }
+
+    public void cambiarIdioma() {
+        actualizarTextos();
+    }
+
 
     public JTable getTblUsuarios() {
         return tblUsuarios;
@@ -133,9 +169,8 @@ public class UsuarioAdminView extends JInternalFrame {
         }
     }
 
-    public void mostrarMensaje(String mensaje) {
-        JOptionPane.showMessageDialog(this, mensaje);
+    public void mostrarMensaje(String clave) {
+        JOptionPane.showMessageDialog(this, mensajeInternacionalizacionHandler.get(clave));
     }
-
 
 }
