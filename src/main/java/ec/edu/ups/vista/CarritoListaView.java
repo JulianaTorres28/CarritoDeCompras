@@ -1,6 +1,7 @@
 package ec.edu.ups.vista;
 
 import ec.edu.ups.modelo.Carrito;
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -13,10 +14,15 @@ public class CarritoListaView extends JInternalFrame {
     private JTable tblCarritos;
     private JButton btnListar;
     private DefaultTableModel modelo;
+    private MensajeInternacionalizacionHandler mensajeInternacionalizacion;
 
-    public CarritoListaView() {
+    public void setMensajeInternacionalizacion(MensajeInternacionalizacionHandler mensajeInternacionalizacion) {
+        this.mensajeInternacionalizacion = mensajeInternacionalizacion;
+    }
+
+    public CarritoListaView(MensajeInternacionalizacionHandler mensajeInternacionalizacion) {
+        this.mensajeInternacionalizacion = mensajeInternacionalizacion;
         setContentPane(panelPrincipal);
-        setTitle("Listado de Carritos");
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
         setSize(600, 500);
         setClosable(true);
@@ -24,10 +30,27 @@ public class CarritoListaView extends JInternalFrame {
         setResizable(true);
 
         modelo = new DefaultTableModel();
-        Object[] columnas = {"Código", "Fecha", "Subtotal", "IVA", "Total", "Usuario"};
+        actualizarTextos();
+    }
+
+    public void actualizarTextos() {
+        setTitle(mensajeInternacionalizacion.get("carritos.lista.titulo"));
+        btnListar.setText(mensajeInternacionalizacion.get("carritos.lista.btn.listar"));
+
+        Object[] columnas = {
+                mensajeInternacionalizacion.get("carritos.lista.columna.codigo"),
+                mensajeInternacionalizacion.get("carritos.lista.columna.fecha"),
+                mensajeInternacionalizacion.get("carritos.lista.columna.subtotal"),
+                mensajeInternacionalizacion.get("carritos.lista.columna.iva"),
+                mensajeInternacionalizacion.get("carritos.lista.columna.total"),
+                mensajeInternacionalizacion.get("carritos.lista.columna.usuario")
+        };
         modelo.setColumnIdentifiers(columnas);
         tblCarritos.setModel(modelo);
+        modelo.fireTableStructureChanged();
     }
+
+
 
     public JButton getBtnListar() { return btnListar; }
 

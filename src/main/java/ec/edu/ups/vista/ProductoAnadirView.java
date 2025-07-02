@@ -1,6 +1,7 @@
 package ec.edu.ups.vista;
 
 import ec.edu.ups.modelo.Producto;
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -15,19 +16,28 @@ public class ProductoAnadirView extends JInternalFrame {
     private JTextField txtCodigo;
     private JButton btnAceptar;
     private JButton btnLimpiar;
+    private JLabel lblCodigo;
+    private JLabel lblNombre;
+    private JLabel lblPrecio;
+    private MensajeInternacionalizacionHandler mensajeInternacionalizacion;
 
-    public ProductoAnadirView() {
+    public void setMensajeInternacionalizacion(MensajeInternacionalizacionHandler mensajeInternacionalizacion) {
+        this.mensajeInternacionalizacion = mensajeInternacionalizacion;
+    }
+
+    public ProductoAnadirView(MensajeInternacionalizacionHandler mensajeInternacionalizacion) {
+        this.mensajeInternacionalizacion = mensajeInternacionalizacion;
+
 
         setContentPane(panelPrincipal);
-        setTitle("Datos del Producto");
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
         setSize(500, 500);
         setClosable(true);
         setIconifiable(true);
         setResizable(true);
-        //setLocationRelativeTo(null);
-        //setVisible(true);
-        //pack();
+
+        actualizarTextos();
+
 
         btnLimpiar.addActionListener(new ActionListener() {
             @Override
@@ -36,6 +46,18 @@ public class ProductoAnadirView extends JInternalFrame {
             }
         });
     }
+
+    public void actualizarTextos() {
+        setTitle(mensajeInternacionalizacion.get("producto.anadir.titulo"));
+
+        lblCodigo.setText(mensajeInternacionalizacion.get("producto.lbl.codigo"));
+        lblNombre.setText(mensajeInternacionalizacion.get("producto.lbl.nombre"));
+        lblPrecio.setText(mensajeInternacionalizacion.get("producto.lbl.precio"));
+
+        btnAceptar.setText(mensajeInternacionalizacion.get("producto.btn.aceptar"));
+        btnLimpiar.setText(mensajeInternacionalizacion.get("producto.btn.limpiar"));
+    }
+
 
     public JPanel getPanelPrincipal() {
         return panelPrincipal;
@@ -83,6 +105,24 @@ public class ProductoAnadirView extends JInternalFrame {
 
     public void setBtnLimpiar(JButton btnLimpiar) {
         this.btnLimpiar = btnLimpiar;
+    }
+
+    public JLabel getLblCodigo() {return lblCodigo;}
+
+    public void setLblCodigo(JLabel lblCodigo) {this.lblCodigo = lblCodigo;}
+
+    public JLabel getLblNombre() {return lblNombre;}
+
+    public void setLblNombre(JLabel lblNombre) {this.lblNombre = lblNombre;}
+
+    public JLabel getLblPrecio() {return lblPrecio;}
+
+    public void setLblPrecio(JLabel lblPrecio) {this.lblPrecio = lblPrecio;}
+
+    public void setMensaje(String mensaje) {}
+
+    public MensajeInternacionalizacionHandler getMensajeInternacionalizacion() {
+        return mensajeInternacionalizacion;
     }
 
     public void mostrarMensaje(String mensaje) {

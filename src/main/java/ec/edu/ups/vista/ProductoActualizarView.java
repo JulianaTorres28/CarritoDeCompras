@@ -1,6 +1,7 @@
 package ec.edu.ups.vista;
 
 import ec.edu.ups.modelo.Producto;
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -17,11 +18,18 @@ public class ProductoActualizarView extends JInternalFrame {
     private JButton btnBuscar;
     private JTable tblProductos;
     private JPanel panelPrincipal;
+    private JLabel lblCodigo;
     private DefaultTableModel modelo;
+    private MensajeInternacionalizacionHandler mensajeInternacionalizacion;
 
-    public ProductoActualizarView() {
+    public void setMensajeInternacionalizacion(MensajeInternacionalizacionHandler mensajeInternacionalizacion) {
+        this.mensajeInternacionalizacion = mensajeInternacionalizacion;
+    }
+
+    public ProductoActualizarView(MensajeInternacionalizacionHandler mensajeInternacionalizacion) {
+        this.mensajeInternacionalizacion = mensajeInternacionalizacion;
+
         setContentPane(panelPrincipal);
-        setTitle("Actualizar Productos");
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
         setSize(500, 500);
         setClosable(true);
@@ -29,9 +37,27 @@ public class ProductoActualizarView extends JInternalFrame {
         setResizable(true);
 
         modelo = new DefaultTableModel();
-        Object[] columnas = {"Codigo", "Nombre", "Precio"};
-        modelo.setColumnIdentifiers(columnas);
         tblProductos.setModel(modelo);
+
+        actualizarTextos();
+    }
+
+    public void actualizarTextos() {
+        setTitle(mensajeInternacionalizacion.get("producto.actualizar.titulo"));
+
+        lblCodigo.setText(mensajeInternacionalizacion.get("producto.lbl.codigo"));
+        lblNombre.setText(mensajeInternacionalizacion.get("producto.lbl.nombre"));
+        lblPrecio.setText(mensajeInternacionalizacion.get("producto.lbl.precio"));
+
+        btnBuscar.setText(mensajeInternacionalizacion.get("producto.btn.buscar"));
+        btnModificar.setText(mensajeInternacionalizacion.get("producto.btn.modificar"));
+
+        modelo.setColumnIdentifiers(new String[]{
+                mensajeInternacionalizacion.get("producto.columna.codigo"),
+                mensajeInternacionalizacion.get("producto.columna.nombre"),
+                mensajeInternacionalizacion.get("producto.columna.precio")
+        });
+        modelo.fireTableStructureChanged();
     }
 
     public JTextField getTxtNombre() {
@@ -114,6 +140,10 @@ public class ProductoActualizarView extends JInternalFrame {
         this.modelo = modelo;
     }
 
+    public JLabel getLblCodigo() {return lblCodigo;}
+
+    public void setLblCodigo(JLabel lblCodigo) {this.lblCodigo = lblCodigo;}
+
     public void cargarDatos(List<Producto> listaProductos) {
         modelo.setNumRows(0);
 
@@ -127,6 +157,10 @@ public class ProductoActualizarView extends JInternalFrame {
         }
 
     }
+    public MensajeInternacionalizacionHandler getMensajeInternacionalizacion() {
+        return mensajeInternacionalizacion;
+    }
+
     public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);
     }
