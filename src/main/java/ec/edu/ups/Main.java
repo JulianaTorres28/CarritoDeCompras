@@ -50,9 +50,9 @@ public class Main {
 
                         MenuPrincipalView principalView = new MenuPrincipalView(mensajeHandler);
                         ProductoAnadirView productoAnadirView = new ProductoAnadirView(mensajeHandler);
-                        ProductoListaView productoListaView = new ProductoListaView();
+                        ProductoListaView productoListaView = new ProductoListaView(mensajeHandler);
                         ProductoActualizarView productoActualizarView = new ProductoActualizarView(mensajeHandler);
-                        ProductoEliminarView productoEliminarView = new ProductoEliminarView();
+                        ProductoEliminarView productoEliminarView = new ProductoEliminarView(mensajeHandler);
                         CarritoAnadirView carritoAnadirView = new CarritoAnadirView(mensajeHandler);
                         CarritoListaView carritoListaView = new CarritoListaView(mensajeHandler);
 
@@ -143,66 +143,70 @@ public class Main {
 
                         principalView.getMenuItemIdiomaEspanol().addActionListener(ev -> {
                             principalView.cambiarIdioma("es", "EC");
-                            if (carritoAnadirView.isVisible()) {
-                                carritoAnadirView.setMensajeInternacionalizacion(mensajeHandler);
-                                carritoAnadirView.actualizarTextos();
-                            }
-                            if (carritoListaView.isVisible()) {
-                                carritoListaView.setMensajeInternacionalizacion(mensajeHandler);
-                                carritoListaView.actualizarTextos();
-                            }
-                            if (productoActualizarView.isVisible()) {
-                                productoActualizarView.setMensajeInternacionalizacion(mensajeHandler);
-                                productoActualizarView.actualizarTextos();
-                            }
-                            if (productoAnadirView.isVisible()) {
-                                productoAnadirView.setMensajeInternacionalizacion(mensajeHandler);
-                                productoAnadirView.actualizarTextos();
-                            }
 
+                            carritoAnadirView.setMensajeInternacionalizacion(mensajeHandler);
+                            carritoAnadirView.actualizarTextos();
+
+                            carritoListaView.setMensajeInternacionalizacion(mensajeHandler);
+                            carritoListaView.actualizarTextos();
+
+                            productoActualizarView.setMensajeInternacionalizacion(mensajeHandler);
+                            productoActualizarView.actualizarTextos();
+
+                            productoAnadirView.setMensajeInternacionalizacion(mensajeHandler);
+                            productoAnadirView.actualizarTextos();
+
+                            productoEliminarView.setMensajeInternacionalizacion(mensajeHandler);
+                            productoEliminarView.actualizarTextos();
+
+                            productoListaView.setMensajeInternacionalizacion(mensajeHandler);
+                            productoListaView.actualizarTextos();
                         });
 
                         principalView.getMenuItemIdiomaIngles().addActionListener(ev -> {
                             principalView.cambiarIdioma("en", "US");
-                            if (carritoAnadirView.isVisible()) {
-                                carritoAnadirView.setMensajeInternacionalizacion(mensajeHandler);
-                                carritoAnadirView.actualizarTextos();
-                            }
-                            if (carritoListaView.isVisible()) {
-                                carritoListaView.setMensajeInternacionalizacion(mensajeHandler);
-                                carritoListaView.actualizarTextos();
-                            }
-                            if (productoActualizarView.isVisible()) {
-                                productoActualizarView.setMensajeInternacionalizacion(mensajeHandler);
-                                productoActualizarView.actualizarTextos();
-                            }
-                            if (productoAnadirView.isVisible()) {
-                                productoAnadirView.setMensajeInternacionalizacion(mensajeHandler);
-                                productoAnadirView.actualizarTextos();
-                            }
 
+                            carritoAnadirView.setMensajeInternacionalizacion(mensajeHandler);
+                            carritoAnadirView.actualizarTextos();
+
+                            carritoListaView.setMensajeInternacionalizacion(mensajeHandler);
+                            carritoListaView.actualizarTextos();
+
+                            productoActualizarView.setMensajeInternacionalizacion(mensajeHandler);
+                            productoActualizarView.actualizarTextos();
+
+                            productoAnadirView.setMensajeInternacionalizacion(mensajeHandler);
+                            productoAnadirView.actualizarTextos();
+
+                            productoEliminarView.setMensajeInternacionalizacion(mensajeHandler);
+                            productoEliminarView.actualizarTextos();
+
+                            productoListaView.setMensajeInternacionalizacion(mensajeHandler);
+                            productoListaView.actualizarTextos();
                         });
 
                         principalView.getMenuItemIdiomaFrances().addActionListener(ev -> {
                             principalView.cambiarIdioma("fr", "FR");
-                            if (carritoAnadirView.isVisible()) {
-                                carritoAnadirView.setMensajeInternacionalizacion(mensajeHandler);
-                                carritoAnadirView.actualizarTextos();
-                            }
-                            if (carritoListaView.isVisible()) {
-                                carritoListaView.setMensajeInternacionalizacion(mensajeHandler);
-                                carritoListaView.actualizarTextos();
-                            }
-                            if (productoActualizarView.isVisible()) {
-                                productoActualizarView.setMensajeInternacionalizacion(mensajeHandler);
-                                productoActualizarView.actualizarTextos();
-                            }
-                            if (productoAnadirView.isVisible()) {
-                                productoAnadirView.setMensajeInternacionalizacion(mensajeHandler);
-                                productoAnadirView.actualizarTextos();
-                            }
 
+                            carritoAnadirView.setMensajeInternacionalizacion(mensajeHandler);
+                            carritoAnadirView.actualizarTextos();
+
+                            carritoListaView.setMensajeInternacionalizacion(mensajeHandler);
+                            carritoListaView.actualizarTextos();
+
+                            productoActualizarView.setMensajeInternacionalizacion(mensajeHandler);
+                            productoActualizarView.actualizarTextos();
+
+                            productoAnadirView.setMensajeInternacionalizacion(mensajeHandler);
+                            productoAnadirView.actualizarTextos();
+
+                            productoEliminarView.setMensajeInternacionalizacion(mensajeHandler);
+                            productoEliminarView.actualizarTextos();
+
+                            productoListaView.setMensajeInternacionalizacion(mensajeHandler);
+                            productoListaView.actualizarTextos();
                         });
+
                     }
                 }
             });

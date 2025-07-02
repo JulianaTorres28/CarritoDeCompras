@@ -1,6 +1,7 @@
 package ec.edu.ups.vista;
 
 import ec.edu.ups.modelo.Producto;
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -14,8 +15,14 @@ public class ProductoListaView extends JInternalFrame {
     private JPanel panelPrincipal;
     private JButton btnListar;
     private DefaultTableModel modelo;
+    private MensajeInternacionalizacionHandler mensajeInternacionalizacion;
 
-    public ProductoListaView() {
+    public void setMensajeInternacionalizacion(MensajeInternacionalizacionHandler mensajeInternacionalizacion) {
+        this.mensajeInternacionalizacion = mensajeInternacionalizacion;
+    }
+
+    public ProductoListaView(MensajeInternacionalizacionHandler mensajeInternacionalizacion) {
+        this.mensajeInternacionalizacion = mensajeInternacionalizacion;
 
         setContentPane(panelPrincipal);
         setTitle("Listado de Productos");
@@ -29,6 +36,22 @@ public class ProductoListaView extends JInternalFrame {
         Object[] columnas = {"Codigo", "Nombre", "Precio"};
         modelo.setColumnIdentifiers(columnas);
         tblProductos.setModel(modelo);
+
+        actualizarTextos();
+
+    }
+
+    public void actualizarTextos() {
+        setTitle(mensajeInternacionalizacion.get("producto.lista.titulo"));
+        btnBuscar.setText(mensajeInternacionalizacion.get("producto.btn.buscar"));
+        btnListar.setText(mensajeInternacionalizacion.get("producto.btn.listar"));
+
+        modelo.setColumnIdentifiers(new String[]{
+                mensajeInternacionalizacion.get("producto.columna.codigo"),
+                mensajeInternacionalizacion.get("producto.columna.nombre"),
+                mensajeInternacionalizacion.get("producto.columna.precio")
+        });
+        modelo.fireTableStructureChanged();
     }
 
     public JTextField getTxtBuscar() {
@@ -90,7 +113,9 @@ public class ProductoListaView extends JInternalFrame {
             };
             modelo.addRow(fila);
         }
+    }
 
-
+    public MensajeInternacionalizacionHandler getMensajeInternacionalizacion() {
+        return mensajeInternacionalizacion;
     }
 }

@@ -1,5 +1,7 @@
 package ec.edu.ups.vista;
 
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,12 +15,18 @@ public class ProductoEliminarView extends JInternalFrame{
     private JTextField textField2;
     private JTextField textField3;
     private JButton btnEliminar;
-    private JLabel btnCodigo;
-    private JLabel btnNombre;
-    private JLabel btnPrecio;
+    private JLabel lblCodigo;
+    private JLabel lbNombre;
+    private JLabel lblPrecio;
     private DefaultTableModel modelo;
+    private MensajeInternacionalizacionHandler mensajeInternacionalizacion;
 
-    public ProductoEliminarView() {
+    public void setMensajeInternacionalizacion(MensajeInternacionalizacionHandler mensajeInternacionalizacion) {
+        this.mensajeInternacionalizacion = mensajeInternacionalizacion;
+    }
+
+    public ProductoEliminarView(MensajeInternacionalizacionHandler mensajeInternacionalizacion) {
+        this.mensajeInternacionalizacion = mensajeInternacionalizacion;
         setContentPane(panelPrincipal);
         setTitle("Eliminar Productos");
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
@@ -31,6 +39,26 @@ public class ProductoEliminarView extends JInternalFrame{
         Object[] columnas = {"Codigo", "Nombre", "Precio"};
         modelo.setColumnIdentifiers(columnas);
         tblProductos.setModel(modelo);
+
+        actualizarTextos();
+
+    }
+
+    public void actualizarTextos() {
+        setTitle(mensajeInternacionalizacion.get("producto.eliminar.titulo"));
+        btnEliminar.setText(mensajeInternacionalizacion.get("producto.btn.eliminar"));
+        btnBuscar.setText(mensajeInternacionalizacion.get("producto.btn.buscar"));
+        lblNombre.setText(mensajeInternacionalizacion.get("producto.lbl.nombre"));
+        lblCodigo.setText(mensajeInternacionalizacion.get("producto.lbl.codigo"));
+        lbNombre.setText(mensajeInternacionalizacion.get("producto.lbl.nombre"));
+        lblPrecio.setText(mensajeInternacionalizacion.get("producto.lbl.precio"));
+
+        modelo.setColumnIdentifiers(new String[] {
+                mensajeInternacionalizacion.get("producto.columna.codigo"),
+                mensajeInternacionalizacion.get("producto.columna.nombre"),
+                mensajeInternacionalizacion.get("producto.columna.precio")
+        });
+        modelo.fireTableStructureChanged();
     }
 
     public JTextField getTxtNombre() {
@@ -105,28 +133,28 @@ public class ProductoEliminarView extends JInternalFrame{
         this.btnEliminar = btnEliminar;
     }
 
-    public JLabel getBtnCodigo() {
-        return btnCodigo;
+    public JLabel getLblCodigo() {
+        return lblCodigo;
     }
 
-    public void setBtnCodigo(JLabel btnCodigo) {
-        this.btnCodigo = btnCodigo;
+    public void setLblCodigo(JLabel lblCodigo) {
+        this.lblCodigo = lblCodigo;
     }
 
-    public JLabel getBtnNombre1() {
-        return btnNombre;
+    public JLabel getLbNombre() {
+        return lbNombre;
     }
 
-    public void setBtnNombre1(JLabel btnNombre1) {
-        this.btnNombre = btnNombre1;
+    public void setLbNombre(JLabel lbNombre) {
+        this.lbNombre = lbNombre;
     }
 
-    public JLabel getBtnPrecio() {
-        return btnPrecio;
+    public JLabel getLblPrecio() {
+        return lblPrecio;
     }
 
-    public void setBtnPrecio(JLabel btnPrecio) {
-        this.btnPrecio = btnPrecio;
+    public void setLblPrecio(JLabel lblPrecio) {
+        this.lblPrecio = lblPrecio;
     }
 
     public DefaultTableModel getModelo() {
@@ -135,6 +163,10 @@ public class ProductoEliminarView extends JInternalFrame{
 
     public void setModelo(DefaultTableModel modelo) {
         this.modelo = modelo;
+    }
+
+    public MensajeInternacionalizacionHandler getMensajeInternacionalizacion() {
+        return mensajeInternacionalizacion;
     }
 
     public void cargarDatos(String codigo, String nombre, String precio) {

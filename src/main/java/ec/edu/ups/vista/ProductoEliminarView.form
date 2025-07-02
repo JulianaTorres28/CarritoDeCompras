@@ -50,7 +50,7 @@
           <text value="Buscar"/>
         </properties>
       </component>
-      <component id="44b12" class="javax.swing.JLabel" binding="btnCodigo">
+      <component id="44b12" class="javax.swing.JLabel" binding="lblCodigo">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -58,7 +58,7 @@
           <text value="Codigo"/>
         </properties>
       </component>
-      <component id="aa710" class="javax.swing.JLabel" binding="btnNombre">
+      <component id="aa710" class="javax.swing.JLabel" binding="lbNombre">
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -66,7 +66,7 @@
           <text value="Nombre"/>
         </properties>
       </component>
-      <component id="125d1" class="javax.swing.JLabel" binding="btnPrecio">
+      <component id="125d1" class="javax.swing.JLabel" binding="lblPrecio">
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>

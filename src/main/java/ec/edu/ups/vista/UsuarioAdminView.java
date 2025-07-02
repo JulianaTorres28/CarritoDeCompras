@@ -72,7 +72,6 @@ public class UsuarioAdminView extends JInternalFrame {
         btnEditar.setText(mensajeInternacionalizacionHandler.get("usuario.admin.boton.editar"));
         btnEliminar.setText(mensajeInternacionalizacionHandler.get("usuario.admin.boton.eliminar"));
 
-        // Actualizar encabezados de la tabla
         modelo.setColumnIdentifiers(new Object[]{
                 mensajeInternacionalizacionHandler.get("usuario.admin.tabla.username"),
                 mensajeInternacionalizacionHandler.get("usuario.admin.tabla.rol")
