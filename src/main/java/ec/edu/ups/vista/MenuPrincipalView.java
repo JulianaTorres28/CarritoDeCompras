@@ -47,7 +47,7 @@ public class MenuPrincipalView extends JFrame {
         // Menús
         menuProducto = new JMenu(mensajeInternacionalizacionHandler.get("menu.producto"));
         menuCarrito = new JMenu(mensajeInternacionalizacionHandler.get("menu.carrito"));
-        menuUsuario = new JMenu(mensajeInternacionalizacionHandler.get("menu.usuario")); // NUEVO
+        menuUsuario = new JMenu(mensajeInternacionalizacionHandler.get("menu.usuario"));
         menuIdioma = new JMenu(mensajeInternacionalizacionHandler.get("menu.idiomas"));
         menuSalir = new JMenu(mensajeInternacionalizacionHandler.get("menu.salir"));
 
@@ -181,6 +181,8 @@ public class MenuPrincipalView extends JFrame {
     public void cambiarIdioma(String lenguaje, String pais) {
         mensajeInternacionalizacionHandler.setLenguaje(lenguaje, pais);
 
+
+
         setTitle(mensajeInternacionalizacionHandler.get("app.titulo"));
 
         menuProducto.setText(mensajeInternacionalizacionHandler.get("menu.producto"));
@@ -206,14 +208,6 @@ public class MenuPrincipalView extends JFrame {
         menuItemSalir.setText(mensajeInternacionalizacionHandler.get("menu.salir.salir"));
         menuItemCerrarSesion.setText(mensajeInternacionalizacionHandler.get("menu.salir.cerrar"));
 
-        JInternalFrame[] frames = jDesktopPane.getAllFrames();
-        for (JInternalFrame frame : frames) {
-            if (frame instanceof CarritoAnadirView) {
-                ((CarritoAnadirView) frame).actualizarTextos();
-            } else if (frame instanceof CarritoListaView) {
-                ((CarritoListaView) frame).actualizarTextos();
-            }
-        }
     }
 
 }

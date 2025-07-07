@@ -9,40 +9,37 @@ import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
 public class UsuarioAdminView extends JInternalFrame {
-    private MensajeInternacionalizacionHandler mensajeInternacionalizacionHandler;
-
     private JPanel panelPrincipal;
     private JTable tblUsuarios;
-    private JComboBox cbxRol;
+    private JComboBox<Rol> cbxRol;
     private JTextField txtcontrasenia;
     private JButton btnBuscar;
     private JButton btnActualizar;
     private JButton btnEditar;
-    private JButton btnEliminar;
     private JTextField txtusername;
+    private JButton btnEliminar;
     private DefaultTableModel modelo;
+    private MensajeInternacionalizacionHandler mensajeInternacionalizacion;
 
-    public UsuarioAdminView(MensajeInternacionalizacionHandler mensajeInternacionalizacionHandler){
-        super("", true, true, true, true);
-        this.mensajeInternacionalizacionHandler = mensajeInternacionalizacionHandler;
 
-        btnEditar = new JButton();
-        btnBuscar = new JButton();
-        btnActualizar = new JButton();
-        btnEliminar = new JButton();
-
-        initComponents();
-        actualizarTextos();
+    public void setMensajeInternacionalizacion(MensajeInternacionalizacionHandler mensajeInternacionalizacion) {
+        this.mensajeInternacionalizacion = mensajeInternacionalizacion;
     }
 
-    private void initComponents() {
-        setSize(600, 400);
+    public UsuarioAdminView(MensajeInternacionalizacionHandler mensajeInternacionalizacion) {
+        this.mensajeInternacionalizacion = mensajeInternacionalizacion;
+        setContentPane(panelPrincipal);
+        setTitle("Eliminar Productos");
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
+        setSize(500, 500);
+        setClosable(true);
+        setIconifiable(true);
+        setResizable(true);
 
         modelo = new DefaultTableModel();
         Object[] columnas = {
-                mensajeInternacionalizacionHandler.get("usuario.admin.tabla.username"),
-                mensajeInternacionalizacionHandler.get("usuario.admin.tabla.rol")
+                mensajeInternacionalizacion.get("usuario.admin.tabla.username"),
+                mensajeInternacionalizacion.get("usuario.admin.tabla.rol")
         };
         modelo.setColumnIdentifiers(columnas);
         tblUsuarios.setModel(modelo);
@@ -62,26 +59,36 @@ public class UsuarioAdminView extends JInternalFrame {
             }
         });
 
-        setContentPane(panelPrincipal);
+        actualizarTextos();
     }
 
-    private void actualizarTextos() {
-        setTitle(mensajeInternacionalizacionHandler.get("usuario.admin.titulo"));
-        btnBuscar.setText(mensajeInternacionalizacionHandler.get("usuario.admin.boton.buscar"));
-        btnActualizar.setText(mensajeInternacionalizacionHandler.get("usuario.admin.boton.actualizar"));
-        btnEditar.setText(mensajeInternacionalizacionHandler.get("usuario.admin.boton.editar"));
-        btnEliminar.setText(mensajeInternacionalizacionHandler.get("usuario.admin.boton.eliminar"));
+
+    public void actualizarTextos() {
+        setTitle(mensajeInternacionalizacion.get("usuario.admin.titulo"));
+        btnBuscar.setText(mensajeInternacionalizacion.get("usuario.admin.boton.buscar"));
+        btnActualizar.setText(mensajeInternacionalizacion.get("usuario.admin.boton.actualizar"));
+        btnEditar.setText(mensajeInternacionalizacion.get("usuario.admin.boton.editar"));
+        btnEliminar.setText(mensajeInternacionalizacion.get("usuario.admin.boton.eliminar"));
 
         modelo.setColumnIdentifiers(new Object[]{
-                mensajeInternacionalizacionHandler.get("usuario.admin.tabla.username"),
-                mensajeInternacionalizacionHandler.get("usuario.admin.tabla.rol")
+                mensajeInternacionalizacion.get("usuario.admin.tabla.username"),
+                mensajeInternacionalizacion.get("usuario.admin.tabla.rol")
         });
+        modelo.fireTableStructureChanged();
     }
 
     public void cambiarIdioma() {
         actualizarTextos();
     }
 
+
+    public JPanel getPanelPrincipal() {
+        return panelPrincipal;
+    }
+
+    public void setPanelPrincipal(JPanel panelPrincipal) {
+        this.panelPrincipal = panelPrincipal;
+    }
 
     public JTable getTblUsuarios() {
         return tblUsuarios;
@@ -91,11 +98,11 @@ public class UsuarioAdminView extends JInternalFrame {
         this.tblUsuarios = tblUsuarios;
     }
 
-    public JComboBox getCbxRol() {
+    public JComboBox<Rol> getCbxRol() {
         return cbxRol;
     }
 
-    public void setCbxRol(JComboBox cbxRol) {
+    public void setCbxRol(JComboBox<Rol> cbxRol) {
         this.cbxRol = cbxRol;
     }
 
@@ -131,20 +138,20 @@ public class UsuarioAdminView extends JInternalFrame {
         this.btnEditar = btnEditar;
     }
 
-    public JButton getBtnEliminar() {
-        return btnEliminar;
-    }
-
-    public void setBtnEliminar(JButton btnEliminar) {
-        this.btnEliminar = btnEliminar;
-    }
-
     public JTextField getTxtusername() {
         return txtusername;
     }
 
     public void setTxtusername(JTextField txtusername) {
         this.txtusername = txtusername;
+    }
+
+    public JButton getBtnEliminar() {
+        return btnEliminar;
+    }
+
+    public void setBtnEliminar(JButton btnEliminar) {
+        this.btnEliminar = btnEliminar;
     }
 
     public DefaultTableModel getModelo() {
@@ -154,11 +161,9 @@ public class UsuarioAdminView extends JInternalFrame {
     public void setModelo(DefaultTableModel modelo) {
         this.modelo = modelo;
     }
-    public JPanel getPanelPrincipal() {
-        return panelPrincipal;
-    }
-    public void setPanelPrincipal(JPanel panelPrincipal) {
-        this.panelPrincipal = panelPrincipal;
+
+    public MensajeInternacionalizacionHandler getMensajeInternacionalizacion() {
+        return mensajeInternacionalizacion;
     }
 
     public void cargarDatos(List<Usuario> usuarios) {
@@ -169,7 +174,6 @@ public class UsuarioAdminView extends JInternalFrame {
     }
 
     public void mostrarMensaje(String clave) {
-        JOptionPane.showMessageDialog(this, mensajeInternacionalizacionHandler.get(clave));
+        JOptionPane.showMessageDialog(this, mensajeInternacionalizacion.get(clave));
     }
-
 }

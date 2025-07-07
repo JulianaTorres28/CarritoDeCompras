@@ -14,7 +14,6 @@ public class ProductoController {
 
     private final ProductoAnadirView productoAnadirView;
     private final ProductoListaView productoListaView;
-    private final CarritoAnadirView carritoAnadirView;
     private final ProductoActualizarView productoActualizarView;
     private final ProductoEliminarView productoEliminarView;
 
@@ -30,7 +29,6 @@ public class ProductoController {
         this.productoDAO = productoDAO;
         this.productoAnadirView = productoAnadirView;
         this.productoListaView = productoListaView;
-        this.carritoAnadirView = carritoAnadirView;
         this.productoActualizarView = productoActualizarView;
         this.productoEliminarView = productoEliminarView;
         this.configurarEventosEnVistas();
@@ -58,12 +56,6 @@ public class ProductoController {
             }
         });
 
-        carritoAnadirView.getBtnBuscar().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                buscarProductoPorCodigo();
-            }
-        });
 
         productoActualizarView.getBtnBuscar().addActionListener(new ActionListener() {
             @Override
@@ -114,19 +106,6 @@ public class ProductoController {
         productoListaView.cargarDatos(productos);
     }
 
-    private void buscarProductoPorCodigo() {
-        int codigo = Integer.parseInt(carritoAnadirView.getTxtCodigo().getText());
-        Producto producto = productoDAO.buscarPorCodigo(codigo);
-        if (producto == null) {
-            carritoAnadirView.mostrarMensaje("No se encontro el producto");
-            carritoAnadirView.getTxtNombre().setText("");
-            carritoAnadirView.getTxtPrecio().setText("");
-        } else {
-            carritoAnadirView.getTxtNombre().setText(producto.getNombre());
-            carritoAnadirView.getTxtPrecio().setText(String.valueOf(producto.getPrecio()));
-        }
-
-    }
 
     private void buscarYMostrarProductoEnTabla() {
         int codigo = Integer.parseInt(productoActualizarView.getTxtCodigo().getText());

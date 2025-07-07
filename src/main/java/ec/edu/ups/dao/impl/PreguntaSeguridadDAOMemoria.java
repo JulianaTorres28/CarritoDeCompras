@@ -1,0 +1,56 @@
+package ec.edu.ups.dao.impl;
+
+import ec.edu.ups.dao.PreguntaSeguridadDAO;
+import ec.edu.ups.modelo.PreguntaSeguridad;
+
+import java.util.*;
+
+public class PreguntaSeguridadDAOMemoria implements PreguntaSeguridadDAO {
+
+    private final List<PreguntaSeguridad> preguntasBase;
+    private final Map<String, List<PreguntaSeguridad>> preguntasPorUsuario;
+    private final Set<String> usuariosRegistrados;
+
+    public PreguntaSeguridadDAOMemoria() {
+        preguntasBase = new ArrayList<>();
+        preguntasPorUsuario = new HashMap<>();
+        usuariosRegistrados = new HashSet<>();
+
+        preguntasBase.add(new PreguntaSeguridad("pregunta.mascota", ""));
+        preguntasBase.add(new PreguntaSeguridad("pregunta.ciudad", ""));
+        preguntasBase.add(new PreguntaSeguridad("pregunta.comida", ""));
+        preguntasBase.add(new PreguntaSeguridad("pregunta.madre", ""));
+        preguntasBase.add(new PreguntaSeguridad("pregunta.abuela", ""));
+        preguntasBase.add(new PreguntaSeguridad("pregunta.cancion", ""));
+        preguntasBase.add(new PreguntaSeguridad("pregunta.color", ""));
+        preguntasBase.add(new PreguntaSeguridad("pregunta.deporte", ""));
+        preguntasBase.add(new PreguntaSeguridad("pregunta.maestro", ""));
+        preguntasBase.add(new PreguntaSeguridad("pregunta.pelicula", ""));
+    }
+
+    @Override
+    public List<PreguntaSeguridad> obtenerPreguntasBase() {
+        return preguntasBase;
+    }
+
+    @Override
+    public void guardarPreguntasPorUsuario(String username, List<PreguntaSeguridad> preguntas) {
+        usuariosRegistrados.add(username);
+        preguntasPorUsuario.put(username, preguntas);
+    }
+
+    @Override
+    public boolean usuarioExiste(String username) {
+        return preguntasPorUsuario.containsKey(username);
+    }
+
+    @Override
+    public List<PreguntaSeguridad> obtenerPreguntasAleatorias(String username, int cantidad) {
+        List<PreguntaSeguridad> preguntasUsuario = preguntasPorUsuario.get(username);
+        if (preguntasUsuario == null || preguntasUsuario.size() <= cantidad) {
+            return preguntasUsuario != null ? preguntasUsuario : new ArrayList<>();
+        }
+        Collections.shuffle(preguntasUsuario);
+        return preguntasUsuario.subList(0, cantidad);
+    }
+}

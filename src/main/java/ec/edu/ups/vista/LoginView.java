@@ -17,6 +17,8 @@ public class LoginView extends JFrame {
     private JLabel lblUsername;
     private JLabel lblPassword;
     private JComboBox cbxIdioma;
+    private JLabel lblRecuperar;
+    private JButton btnRecuperar;
 
     public LoginView(MensajeInternacionalizacionHandler mensajeInternacionalizacionHandler) {
         this.mensajeInternacionalizacionHandler = mensajeInternacionalizacionHandler;
@@ -24,7 +26,7 @@ public class LoginView extends JFrame {
         actualizarTextos();
     }
     private void initComponents() {
-        setSize(500, 400);
+        setSize(600, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(panelPrincipal);
@@ -73,6 +75,8 @@ public class LoginView extends JFrame {
         lblPassword.setText(mensajeInternacionalizacionHandler.get("login.password"));
         btnIniciarSesion.setText(mensajeInternacionalizacionHandler.get("login.ingresar"));
         btnRegistrarse.setText(mensajeInternacionalizacionHandler.get("login.registrarse"));
+        lblRecuperar.setText(mensajeInternacionalizacionHandler.get("login.recuperar"));
+        btnRecuperar.setText(mensajeInternacionalizacionHandler.get("login.recuperar.btn"));
     }
 
 
@@ -124,8 +128,56 @@ public class LoginView extends JFrame {
         this.btnRegistrarse = btnRegistrarse;
     }
 
-    public void mostrarMensaje(String mensaje) {
-        JOptionPane.showMessageDialog(this, mensaje);
+    public MensajeInternacionalizacionHandler getMensajeInternacionalizacionHandler() {
+        return mensajeInternacionalizacionHandler;
+    }
+
+    public void setMensajeInternacionalizacionHandler(MensajeInternacionalizacionHandler mensajeInternacionalizacionHandler) {
+        this.mensajeInternacionalizacionHandler = mensajeInternacionalizacionHandler;
+    }
+
+    public JLabel getLblUsername() {
+        return lblUsername;
+    }
+
+    public void setLblUsername(JLabel lblUsername) {
+        this.lblUsername = lblUsername;
+    }
+
+    public JLabel getLblPassword() {
+        return lblPassword;
+    }
+
+    public void setLblPassword(JLabel lblPassword) {
+        this.lblPassword = lblPassword;
+    }
+
+    public JComboBox getCbxIdioma() {
+        return cbxIdioma;
+    }
+
+    public void setCbxIdioma(JComboBox cbxIdioma) {
+        this.cbxIdioma = cbxIdioma;
+    }
+
+    public JLabel getLblRecuperar() {
+        return lblRecuperar;
+    }
+
+    public void setLblRecuperar(JLabel lblRecuperar) {
+        this.lblRecuperar = lblRecuperar;
+    }
+
+    public JButton getBtnRecuperar() {
+        return btnRecuperar;
+    }
+
+    public void setBtnRecuperar(JButton btnRecuperar) {
+        this.btnRecuperar = btnRecuperar;
+    }
+
+    public void mostrarMensaje(String clave) {
+        JOptionPane.showMessageDialog(this, mensajeInternacionalizacionHandler.get(clave));
     }
     public void limpiarCampos() {
         txtUsername.setText("");

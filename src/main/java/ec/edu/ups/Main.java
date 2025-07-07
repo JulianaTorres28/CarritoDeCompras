@@ -6,9 +6,11 @@ import ec.edu.ups.controlador.UsuarioController;
 import ec.edu.ups.dao.CarritoDAO;
 import ec.edu.ups.dao.ProductoDAO;
 import ec.edu.ups.dao.UsuarioDAO;
+import ec.edu.ups.dao.PreguntaSeguridadDAO;
 import ec.edu.ups.dao.impl.CarritoDAOMemoria;
 import ec.edu.ups.dao.impl.ProductoDAOMemoria;
 import ec.edu.ups.dao.impl.UsuarioDAOMemoria;
+import ec.edu.ups.dao.impl.PreguntaSeguridadDAOMemoria;
 import ec.edu.ups.modelo.Rol;
 import ec.edu.ups.modelo.Usuario;
 import ec.edu.ups.util.MensajeInternacionalizacionHandler;
@@ -23,16 +25,24 @@ public class Main {
 
             MensajeInternacionalizacionHandler mensajeHandler = new MensajeInternacionalizacionHandler("es", "EC");
 
+            // DAOs
             UsuarioDAO usuarioDAO = new UsuarioDAOMemoria();
+            PreguntaSeguridadDAO preguntaSeguridadDAO = new PreguntaSeguridadDAOMemoria();
+
+            // Vistas
             LoginView loginView = new LoginView(mensajeHandler);
             UsuarioRegistroView usuarioRegistroView = new UsuarioRegistroView(mensajeHandler);
             UsuarioAdminView usuarioAdminView = new UsuarioAdminView(mensajeHandler);
+            RecuperarCuentaView recuperarCuentaView = new RecuperarCuentaView(mensajeHandler);
 
+            // Controlador principal
             UsuarioController usuarioController = new UsuarioController(
                     usuarioDAO,
+                    preguntaSeguridadDAO,
                     loginView,
                     usuarioRegistroView,
-                    usuarioAdminView
+                    usuarioAdminView,
+                    recuperarCuentaView
             );
 
             loginView.setVisible(true);
@@ -43,7 +53,6 @@ public class Main {
 
                     Usuario usuarioAutenticado = usuarioController.getUsuarioAutenticado();
                     if (usuarioAutenticado != null) {
-
 
                         ProductoDAO productoDAO = new ProductoDAOMemoria();
                         CarritoDAO carritoDAO = new CarritoDAOMemoria();
@@ -73,7 +82,8 @@ public class Main {
                                 usuarioAutenticado
                         );
 
-                        principalView.mostrarMensaje("Bienvenido: " + usuarioAutenticado.getUsername());
+                        String mensajeBienvenida = mensajeHandler.getFormato("app.bienvenida", usuarioAutenticado.getUsername());
+                        principalView.mostrarMensaje(mensajeBienvenida);
                         if (usuarioAutenticado.getRol().equals(Rol.USUARIO)) {
                             principalView.deshabilitarMenusAdministrador();
                         }
@@ -142,7 +152,11 @@ public class Main {
                         });
 
                         principalView.getMenuItemIdiomaEspanol().addActionListener(ev -> {
+                            mensajeHandler.setLenguaje("es", "EC");
                             principalView.cambiarIdioma("es", "EC");
+
+                            usuarioRegistroView.setMensajeInternacionalizacion(mensajeHandler);
+                            usuarioRegistroView.actualizarTextos();
 
                             carritoAnadirView.setMensajeInternacionalizacion(mensajeHandler);
                             carritoAnadirView.actualizarTextos();
@@ -161,11 +175,18 @@ public class Main {
 
                             productoListaView.setMensajeInternacionalizacion(mensajeHandler);
                             productoListaView.actualizarTextos();
+
+                            recuperarCuentaView.setMensajeInternacionalizacion(mensajeHandler);
+                            recuperarCuentaView.actualizarTextos();
                         });
 
                         principalView.getMenuItemIdiomaIngles().addActionListener(ev -> {
+                            mensajeHandler.setLenguaje("en", "US");
                             principalView.cambiarIdioma("en", "US");
 
+                            usuarioRegistroView.setMensajeInternacionalizacion(mensajeHandler);
+                            usuarioRegistroView.actualizarTextos();
+
                             carritoAnadirView.setMensajeInternacionalizacion(mensajeHandler);
                             carritoAnadirView.actualizarTextos();
 
@@ -183,10 +204,18 @@ public class Main {
 
                             productoListaView.setMensajeInternacionalizacion(mensajeHandler);
                             productoListaView.actualizarTextos();
+
+                            recuperarCuentaView.setMensajeInternacionalizacion(mensajeHandler);
+                            recuperarCuentaView.actualizarTextos();
                         });
 
+
                         principalView.getMenuItemIdiomaFrances().addActionListener(ev -> {
+                            mensajeHandler.setLenguaje("fr", "FR");
                             principalView.cambiarIdioma("fr", "FR");
+
+                            usuarioRegistroView.setMensajeInternacionalizacion(mensajeHandler);
+                            usuarioRegistroView.actualizarTextos();
 
                             carritoAnadirView.setMensajeInternacionalizacion(mensajeHandler);
                             carritoAnadirView.actualizarTextos();
@@ -205,6 +234,9 @@ public class Main {
 
                             productoListaView.setMensajeInternacionalizacion(mensajeHandler);
                             productoListaView.actualizarTextos();
+
+                            recuperarCuentaView.setMensajeInternacionalizacion(mensajeHandler);
+                            recuperarCuentaView.actualizarTextos();
                         });
 
                     }

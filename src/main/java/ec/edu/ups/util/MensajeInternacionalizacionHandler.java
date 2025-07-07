@@ -1,5 +1,6 @@
 package ec.edu.ups.util;
 
+import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -18,6 +19,11 @@ public class MensajeInternacionalizacionHandler {
         } catch (MissingResourceException e) {
             return "!" + key + "!";
         }
+    }
+
+    public String getFormato(String key, Object... args) {
+        String pattern = get(key);
+        return MessageFormat.format(pattern, args);
     }
 
     public void setLenguaje(String lenguaje, String pais) {

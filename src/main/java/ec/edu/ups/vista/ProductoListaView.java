@@ -14,6 +14,7 @@ public class ProductoListaView extends JInternalFrame {
     private JTable tblProductos;
     private JPanel panelPrincipal;
     private JButton btnListar;
+    private JLabel lblNombre;
     private DefaultTableModel modelo;
     private MensajeInternacionalizacionHandler mensajeInternacionalizacion;
 
@@ -45,6 +46,7 @@ public class ProductoListaView extends JInternalFrame {
         setTitle(mensajeInternacionalizacion.get("producto.lista.titulo"));
         btnBuscar.setText(mensajeInternacionalizacion.get("producto.btn.buscar"));
         btnListar.setText(mensajeInternacionalizacion.get("producto.btn.listar"));
+        lblNombre.setText(mensajeInternacionalizacion.get("producto.lbl.nombre"));
 
         modelo.setColumnIdentifiers(new String[]{
                 mensajeInternacionalizacion.get("producto.columna.codigo"),

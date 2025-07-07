@@ -48,6 +48,12 @@ public class CarritoController {
         carritoListaView.getBtnListar().addActionListener(e -> cargarCarritosEnTabla());
         carritoAnadirView.getBtnEliminarItem().addActionListener(e -> eliminarItem());
         carritoAnadirView.getBtnActualizarCantidad().addActionListener(e -> actualizarCantidad());
+        carritoAnadirView.getBtnBuscar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buscarProductoPorCodigo();
+            }
+        });
     }
 
     private void anadirProducto() {
@@ -147,6 +153,20 @@ public class CarritoController {
     private void limpiarTablaProductos() {
         var modelo = (javax.swing.table.DefaultTableModel) carritoAnadirView.getTblProductos().getModel();
         modelo.setRowCount(0);
+    }
+
+    private void buscarProductoPorCodigo() {
+        int codigo = Integer.parseInt(carritoAnadirView.getTxtCodigo().getText());
+        Producto producto = productoDAO.buscarPorCodigo(codigo);
+        if (producto == null) {
+            carritoAnadirView.mostrarMensaje("No se encontro el producto");
+            carritoAnadirView.getTxtNombre().setText("");
+            carritoAnadirView.getTxtPrecio().setText("");
+        } else {
+            carritoAnadirView.getTxtNombre().setText(producto.getNombre());
+            carritoAnadirView.getTxtPrecio().setText(String.valueOf(producto.getPrecio()));
+        }
+
     }
 
 }
