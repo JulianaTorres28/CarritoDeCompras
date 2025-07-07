@@ -3,6 +3,8 @@
 Este proyecto fue desarrollado como parte del **período 66** de la asignatura **Programación Orientada a Objetos** en la Universidad Politécnica Salesiana.  
 Su objetivo principal es demostrar el uso de **patrones de diseño** aplicados a una aplicación Java con interfaz gráfica construida con **Swing**.
 
+
+Link video: https://youtu.be/to6H04O2W7U?si=-MtNimRvLnc8d9GX
 ---
 
 ## 🎯 Objetivo del proyecto
