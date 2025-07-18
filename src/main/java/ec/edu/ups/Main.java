@@ -1,3 +1,25 @@
+/**
+ * Clase principal que inicia la aplicación de gestión de productos, usuarios y carritos.
+ *
+ * <p>Responsable de:
+ * <ul>
+ *     <li>Inicializar los controladores, DAOs y vistas.</li>
+ *     <li>Lanzar la ventana de login.</li>
+ *     <li>Manejar la lógica posterior al cierre del login: mostrar el menú principal y habilitar funciones según el rol.</li>
+ *     <li>Asignar los manejadores de eventos a los distintos menús del sistema.</li>
+ *     <li>Soportar internacionalización del sistema (español, inglés, francés).</li>
+ * </ul>
+ *
+ * <p>Al cerrar el `LoginView`, si el usuario fue autenticado correctamente, se carga el entorno completo de la aplicación.
+ * Dependiendo del rol (USUARIO o ADMIN), se habilitan o deshabilitan opciones del menú principal.
+ *
+ * <p>Este sistema utiliza MVC (Modelo-Vista-Controlador), DAOs para persistencia (texto o memoria),
+ * e internacionalización a través de `MensajeInternacionalizacionHandler`.
+ *
+ * @author Juliana Torres
+ * @version 1.0
+ */
+
 package ec.edu.ups;
 
 import ec.edu.ups.controlador.CarritoController;
@@ -7,10 +29,7 @@ import ec.edu.ups.dao.CarritoDAO;
 import ec.edu.ups.dao.ProductoDAO;
 import ec.edu.ups.dao.UsuarioDAO;
 import ec.edu.ups.dao.PreguntaSeguridadDAO;
-import ec.edu.ups.dao.impl.CarritoDAOMemoria;
-import ec.edu.ups.dao.impl.ProductoDAOMemoria;
-import ec.edu.ups.dao.impl.UsuarioDAOMemoria;
-import ec.edu.ups.dao.impl.PreguntaSeguridadDAOMemoria;
+import ec.edu.ups.dao.impl.*;
 import ec.edu.ups.modelo.Rol;
 import ec.edu.ups.modelo.Usuario;
 import ec.edu.ups.util.MensajeInternacionalizacionHandler;
@@ -26,7 +45,7 @@ public class Main {
             MensajeInternacionalizacionHandler mensajeHandler = new MensajeInternacionalizacionHandler("es", "EC");
 
             // DAOs
-            UsuarioDAO usuarioDAO = new UsuarioDAOMemoria();
+            UsuarioDAO usuarioDAO = new UsuarioDAOTexto("usuarios.txt");
             PreguntaSeguridadDAO preguntaSeguridadDAO = new PreguntaSeguridadDAOMemoria();
 
             // Vistas

@@ -1,3 +1,30 @@
+/**
+ * Vista gráfica administrativa para gestionar usuarios dentro del sistema.
+ *
+ * Esta clase permite al administrador:
+ * <ul>
+ *   <li>Buscar usuarios por nombre de usuario.</li>
+ *   <li>Editar roles de usuarios existentes.</li>
+ *   <li>Actualizar la tabla de usuarios.</li>
+ *   <li>Eliminar usuarios seleccionados.</li>
+ *   <li>Internacionalizar la interfaz con {@link MensajeInternacionalizacionHandler}.</li>
+ * </ul>
+ *
+ * Componentes clave:
+ * <ul>
+ *   <li>`tblUsuarios`: Tabla que muestra el nombre de usuario y su rol.</li>
+ *   <li>`txtusername`: Campo para editar o mostrar el nombre de usuario.</li>
+ *   <li>`cbxRol`: ComboBox para seleccionar y cambiar el rol de un usuario.</li>
+ *   <li>`btnBuscar`, `btnEditar`, `btnActualizar`, `btnEliminar`: Botones para operaciones CRUD.</li>
+ * </ul>
+ *
+ * Al seleccionar una fila de la tabla, se cargan los datos del usuario en los campos correspondientes.
+ * Esta clase extiende `JInternalFrame`, por lo que puede ser utilizada dentro de un contenedor MDI.
+ *
+ * @author Juliana Torres
+ * @version 1.0
+ */
+
 package ec.edu.ups.vista;
 
 import ec.edu.ups.modelo.Rol;

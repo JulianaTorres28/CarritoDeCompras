@@ -5,53 +5,92 @@ import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Clase que representa un carrito de compras asociado a un usuario.
+ * Contiene una lista de productos (ítems), la fecha de creación y
+ * funcionalidades para calcular subtotal, IVA y total.
+ */
 public class Carrito {
+
     private Usuario usuario;
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
     private final double IVA = 0.12;
-
     private static int contador = 1;
 
     private int codigo;
-
     private GregorianCalendar fechaCreacion;
-
     private List<ItemCarrito> items;
 
+    /**
+     * Constructor por defecto. Inicializa el carrito con un código único,
+     * una fecha de creación y una lista vacía de ítems.
+     */
     public Carrito() {
         codigo = contador++;
         items = new ArrayList<>();
         fechaCreacion = new GregorianCalendar();
     }
 
+    /**
+     * Obtiene el usuario asociado al carrito.
+     * @return el usuario del carrito.
+     */
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * Establece el usuario asociado al carrito.
+     * @param usuario el usuario a asignar.
+     */
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    /**
+     * Obtiene el código único del carrito.
+     * @return el código del carrito.
+     */
     public int getCodigo() {
         return codigo;
     }
 
+    /**
+     * Establece el código del carrito.
+     * @param codigo el nuevo código del carrito.
+     */
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
+    /**
+     * Obtiene la fecha de creación del carrito.
+     * @return la fecha de creación.
+     */
     public GregorianCalendar getFechaCreacion() {
         return fechaCreacion;
     }
 
+    /**
+     * Establece la fecha de creación del carrito.
+     * @param fechaCreacion nueva fecha de creación.
+     */
     public void setFechaCreacion(GregorianCalendar fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
+    /**
+     * Agrega un producto al carrito con una cantidad específica.
+     * @param producto el producto a agregar.
+     * @param cantidad la cantidad del producto.
+     */
     public void agregarProducto(Producto producto, int cantidad) {
         items.add(new ItemCarrito(producto, cantidad));
     }
 
+    /**
+     * Elimina un producto del carrito por su código.
+     * @param codigoProducto el código del producto a eliminar.
+     */
     public void eliminarProducto(int codigoProducto) {
         Iterator<ItemCarrito> it = items.iterator();
         while (it.hasNext()) {
@@ -62,18 +101,33 @@ public class Carrito {
         }
     }
 
+    /**
+     * Vacía completamente el carrito.
+     */
     public void vaciarCarrito() {
         items.clear();
     }
 
+    /**
+     * Obtiene la lista de ítems del carrito.
+     * @return lista de ítems.
+     */
     public List<ItemCarrito> obtenerItems() {
         return items;
     }
 
+    /**
+     * Verifica si el carrito está vacío.
+     * @return true si no tiene ítems, false en caso contrario.
+     */
     public boolean estaVacio() {
         return items.isEmpty();
     }
 
+    /**
+     * Calcula el subtotal del carrito (sin IVA).
+     * @return el subtotal.
+     */
     public double calcularSubtotal() {
         double subtotal = 0;
         for (ItemCarrito item : items) {
@@ -82,25 +136,27 @@ public class Carrito {
         return subtotal;
     }
 
+    /**
+     * Calcula el valor del IVA del carrito.
+     * @return el monto del IVA.
+     */
     public double calcularIVA() {
-        double subtotal = calcularSubtotal();
-        return subtotal * IVA;
+        return calcularSubtotal() * IVA;
     }
 
+    /**
+     * Calcula el total a pagar (subtotal + IVA).
+     * @return el total del carrito.
+     */
     public double calcularTotal() {
         return calcularSubtotal() + calcularIVA();
     }
 
-    @Override
-    public String toString() {
-        return "Carrito{" +
-                "IVA=" + IVA +
-                ", codigo=" + codigo +
-                ", fechaCreacion=" + fechaCreacion +
-                ", items=" + items +
-                '}';
-    }
-
+    /**
+     * Actualiza la cantidad de un producto específico en el carrito.
+     * @param codigoProducto código del producto a modificar.
+     * @param nuevaCantidad nueva cantidad a asignar.
+     */
     public void actualizarCantidadProducto(int codigoProducto, int nuevaCantidad) {
         for (ItemCarrito item : items) {
             if (item.getProducto().getCodigo() == codigoProducto) {
@@ -110,5 +166,17 @@ public class Carrito {
         }
     }
 
+    /**
+     * Retorna una representación textual del carrito.
+     * @return cadena de texto con la información del carrito.
+     */
+    @Override
+    public String toString() {
+        return "Carrito{" +
+                "IVA=" + IVA +
+                ", codigo=" + codigo +
+                ", fechaCreacion=" + fechaCreacion +
+                ", items=" + items +
+                '}';
+    }
 }
-

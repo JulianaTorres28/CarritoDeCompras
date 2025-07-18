@@ -1,8 +1,30 @@
+/**
+ * Clase que representa la ventana principal del sistema.
+ * Contiene un menú con opciones para gestionar productos, carritos y usuarios,
+ * así como cambiar el idioma de la interfaz o cerrar la sesión.
+ * Utiliza internacionalización a través de {@link MensajeInternacionalizacionHandler}.
+ *
+ * <p>El menú incluye:
+ * <ul>
+ *     <li>Gestión de productos: crear, eliminar, actualizar y buscar.</li>
+ *     <li>Gestión de carritos: crear y listar.</li>
+ *     <li>Gestión de usuarios: acceso restringido por rol.</li>
+ *     <li>Configuración de idioma: español, inglés y francés.</li>
+ *     <li>Opciones de salida: cerrar sesión o salir de la aplicación.</li>
+ * </ul>
+ *
+ * La clase también permite actualizar dinámicamente los textos de la interfaz
+ * al cambiar el idioma, y deshabilitar ciertos menús para los usuarios no administradores.
+ *
+ * @author Juliana Torres
+ * @version 1.0
+ */
 package ec.edu.ups.vista;
 
 import ec.edu.ups.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class MenuPrincipalView extends JFrame {
 
@@ -42,60 +64,65 @@ public class MenuPrincipalView extends JFrame {
 
     private void initComponents() {
         jDesktopPane = new JDesktopPane();
+
+        ImageIcon iconoOriginal = new ImageIcon(getClass().getResource("/iconos/logo.png"));
+        JLabel lblFondo = new JLabel();
+        lblFondo.setBounds(0, 0, getWidth(), getHeight());
+        jDesktopPane.add(lblFondo, JLayeredPane.FRAME_CONTENT_LAYER);
+
+        this.addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                Image imagenEscalada = iconoOriginal.getImage().getScaledInstance(
+                        jDesktopPane.getWidth(), jDesktopPane.getHeight(), Image.SCALE_SMOOTH);
+                lblFondo.setIcon(new ImageIcon(imagenEscalada));
+                lblFondo.setBounds(0, 0, jDesktopPane.getWidth(), jDesktopPane.getHeight());
+            }
+        });
+
+
         menuBar = new JMenuBar();
 
-        // Menús
         menuProducto = new JMenu(mensajeInternacionalizacionHandler.get("menu.producto"));
         menuCarrito = new JMenu(mensajeInternacionalizacionHandler.get("menu.carrito"));
         menuUsuario = new JMenu(mensajeInternacionalizacionHandler.get("menu.usuario"));
         menuIdioma = new JMenu(mensajeInternacionalizacionHandler.get("menu.idiomas"));
         menuSalir = new JMenu(mensajeInternacionalizacionHandler.get("menu.salir"));
 
-        // Ítems Producto
         menuItemCrearProducto = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.producto.crear"));
         menuItemEliminarProducto = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.producto.eliminar"));
         menuItemActualizarProducto = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.producto.actualizar"));
         menuItemBuscarProducto = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.producto.buscar"));
 
-        // Ítems Carrito
         menuItemCrearCarrito = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.carrito.crear"));
         menuItemListarCarritos = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.carrito.listar"));
 
-        // Ítem Usuario
         menuItemGestionarUsuarios = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.usuario.gestionar"));
 
-        // Ítems Idioma
         menuItemIdiomaEspanol = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.idioma.es"));
         menuItemIdiomaIngles = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.idioma.en"));
         menuItemIdiomaFrances = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.idioma.fr"));
 
-        // Ítems Salir
         menuItemSalir = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.salir.salir"));
         menuItemCerrarSesion = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.salir.cerrar"));
 
-        // Organizar menú Producto
         menuProducto.add(menuItemCrearProducto);
         menuProducto.add(menuItemEliminarProducto);
         menuProducto.add(menuItemActualizarProducto);
         menuProducto.add(menuItemBuscarProducto);
 
-        // Organizar menú Carrito
         menuCarrito.add(menuItemCrearCarrito);
         menuCarrito.add(menuItemListarCarritos);
 
-        // Organizar menú Usuario
         menuUsuario.add(menuItemGestionarUsuarios);
 
-        // Organizar menú Idioma
         menuIdioma.add(menuItemIdiomaEspanol);
         menuIdioma.add(menuItemIdiomaIngles);
         menuIdioma.add(menuItemIdiomaFrances);
 
-        // Organizar menú Salir
         menuSalir.add(menuItemCerrarSesion);
         menuSalir.add(menuItemSalir);
 
-        // Agregar menús a la barra
         menuBar.add(menuProducto);
         menuBar.add(menuCarrito);
         menuBar.add(menuUsuario);
@@ -133,6 +160,7 @@ public class MenuPrincipalView extends JFrame {
     public JMenuItem getMenuItemListarCarritos() {
         return menuItemListarCarritos;
     }
+
     public JMenuItem getMenuItemGestionarUsuarios() {
         return menuItemGestionarUsuarios;
     }
@@ -165,7 +193,6 @@ public class MenuPrincipalView extends JFrame {
         return mensajeInternacionalizacionHandler;
     }
 
-    // DESHABILITAR PARA USUARIO NORMAL
     public void deshabilitarMenusAdministrador() {
         getMenuItemCrearProducto().setEnabled(false);
         getMenuItemBuscarProducto().setEnabled(false);
@@ -180,8 +207,6 @@ public class MenuPrincipalView extends JFrame {
 
     public void cambiarIdioma(String lenguaje, String pais) {
         mensajeInternacionalizacionHandler.setLenguaje(lenguaje, pais);
-
-
 
         setTitle(mensajeInternacionalizacionHandler.get("app.titulo"));
 
@@ -207,7 +232,5 @@ public class MenuPrincipalView extends JFrame {
 
         menuItemSalir.setText(mensajeInternacionalizacionHandler.get("menu.salir.salir"));
         menuItemCerrarSesion.setText(mensajeInternacionalizacionHandler.get("menu.salir.cerrar"));
-
     }
-
 }

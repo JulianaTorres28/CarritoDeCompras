@@ -1,3 +1,35 @@
+/**
+ * Ventana de registro de usuarios en el sistema.
+ *
+ * Esta clase permite a los nuevos usuarios registrarse proporcionando los siguientes datos:
+ * <ul>
+ *   <li>Nombre de usuario</li>
+ *   <li>Cédula</li>
+ *   <li>Contraseña</li>
+ *   <li>Rol (ADMIN, CLIENTE, etc.)</li>
+ *   <li>Preguntas de seguridad con sus respectivas respuestas</li>
+ * </ul>
+ *
+ * La clase utiliza un sistema de internacionalización para traducir los textos y etiquetas
+ * mediante la clase {@link MensajeInternacionalizacionHandler}. También incluye íconos gráficos
+ * para una mejor interfaz visual.
+ *
+ * Componentes principales:
+ * <ul>
+ *   <li>`txtUsername`, `txtContrasenia`, `txtCedula`: campos de entrada de datos</li>
+ *   <li>`cbxRol`: lista desplegable para seleccionar el rol</li>
+ *   <li>`cbxPregunta1`, `cbxPregunta2`, `cbxPregunta3`: listas desplegables de preguntas de seguridad</li>
+ *   <li>`txtRespuesta1`, `txtRespuesta2`, `txtRespuesta3`: campos para respuestas de seguridad</li>
+ *   <li>`btnGuardar`: botón para guardar el usuario</li>
+ * </ul>
+ *
+ * También proporciona métodos para limpiar campos, mostrar mensajes, cambiar idioma y
+ * establecer las preguntas base en los `ComboBox`.
+ *
+ * @author Juliana Torres
+ * @version 1.0
+ */
+
 package ec.edu.ups.vista;
 
 import ec.edu.ups.modelo.PreguntaSeguridad;
@@ -24,6 +56,8 @@ public class UsuarioRegistroView extends JFrame {
     private JTextField txtRespuesta2;
     private JComboBox cbxPregunta3;
     private JTextField txtRespuesta3;
+    private JLabel lblCedula;
+    private JTextField txtCedula;
 
     private MensajeInternacionalizacionHandler mensajeInternacionalizacion;
 
@@ -49,12 +83,19 @@ public class UsuarioRegistroView extends JFrame {
         }
 
         actualizarTextos();
+
+        btnGuardar.setIcon(new ImageIcon(getClass().getResource("/iconos/save.png")));
+        lblUsername.setIcon(new ImageIcon(getClass().getResource("/iconos/username.png")));
+        lblCedula.setIcon(new ImageIcon(getClass().getResource("/iconos/id.png")));
+        lblContrasenia.setIcon(new ImageIcon(getClass().getResource("/iconos/password.png")));
+        lblPreguntas.setIcon(new ImageIcon(getClass().getResource("/iconos/question.png")));
     }
 
 
     public void actualizarTextos() {
         setTitle(mensajeInternacionalizacion.get("usuario.registro.titulo"));
         lblUsername.setText(mensajeInternacionalizacion.get("usuario.registro.username"));
+        lblCedula.setText(mensajeInternacionalizacion.get("usuario.registro.cedula"));
         lblContrasenia.setText(mensajeInternacionalizacion.get("usuario.registro.contrasenia"));
         lblRol.setText(mensajeInternacionalizacion.get("usuario.registro.rol"));
         lblPreguntas.setText(mensajeInternacionalizacion.get("usuario.registro.preguntas"));
@@ -146,7 +187,34 @@ public class UsuarioRegistroView extends JFrame {
         return txtRespuesta3;
     }
 
+    public JLabel getLblCedula() {
+        return lblCedula;
+    }
+    public JTextField getTxtCedula() {
+        return txtCedula;
+    }
+    public void setTxtCedula(JTextField txtCedula) {
+        this.txtCedula = txtCedula;
+    }
+    public void setLblCedula(JLabel lblCedula) {
+        this.lblCedula = lblCedula;
+    }
+
     public MensajeInternacionalizacionHandler getMensajeInternacionalizacion() {
         return mensajeInternacionalizacion;
     }
+
+    public void limpiarCampos() {
+        txtUsername.setText("");
+        txtCedula.setText("");
+        txtContrasenia.setText("");
+        cbxRol.setSelectedIndex(0);
+        cbxPregunta1.setSelectedIndex(0);
+        cbxPregunta2.setSelectedIndex(0);
+        cbxPregunta3.setSelectedIndex(0);
+        txtRespuesta1.setText("");
+        txtRespuesta2.setText("");
+        txtRespuesta3.setText("");
+    }
+
 }
