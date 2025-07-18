@@ -1,3 +1,24 @@
+/**
+ * Ventana interna de la aplicación que permite al usuario añadir productos a un carrito de compras.
+ * Presenta una interfaz gráfica con campos de entrada y botones para:
+ * <ul>
+ *     <li>Buscar productos por código</li>
+ *     <li>Añadir productos al carrito con una cantidad seleccionada</li>
+ *     <li>Eliminar productos del carrito</li>
+ *     <li>Actualizar cantidades</li>
+ *     <li>Guardar el carrito</li>
+ *     <li>Limpiar todos los campos</li>
+ * </ul>
+ *
+ * Además, muestra el subtotal, IVA y total calculado en tiempo real,
+ * y permite la internacionalización de la interfaz gráfica.
+ *
+ * Esta clase forma parte del módulo de ventas de la aplicación.
+ *
+ * @author Juliana Torres
+ * @version 1.0
+ */
+
 package ec.edu.ups.vista;
 
 import ec.edu.ups.util.MensajeInternacionalizacionHandler;

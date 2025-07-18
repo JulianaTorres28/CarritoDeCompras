@@ -1,3 +1,31 @@
+/**
+ * Vista gráfica para recuperar la cuenta de usuario mediante preguntas de seguridad.
+ *
+ * Esta clase permite:
+ * <ul>
+ *   <li>Verificar si el nombre de usuario ingresado existe en el sistema.</li>
+ *   <li>Mostrar preguntas de seguridad asociadas al usuario.</li>
+ *   <li>Verificar respuestas y permitir establecer una nueva contraseña.</li>
+ *   <li>Internacionalizar todos los textos visibles mediante {@link MensajeInternacionalizacionHandler}.</li>
+ * </ul>
+ *
+ * Componentes gráficos:
+ * <ul>
+ *   <li>`txtUsuario`: Campo para ingresar el nombre de usuario.</li>
+ *   <li>`btnVerificarUsuario`: Botón para comprobar si el usuario existe y mostrar preguntas.</li>
+ *   <li>`lblPregunta1`, `lblPregunta2`, `lblPregunta3`: Etiquetas con las preguntas de seguridad.</li>
+ *   <li>`txtRespuesta1`, `txtRespuesta2`, `txtRespuesta3`: Campos para ingresar las respuestas.</li>
+ *   <li>`btnVerificarRespuestas`: Botón para validar las respuestas ingresadas.</li>
+ *   <li>`lblNuevaContrasenia`, `txtNuevaContrasenia`, `btnGuardarNuevaContrasenia`: Campos para establecer una nueva contraseña.</li>
+ *   <li>`lblMensaje`: Etiqueta para mostrar mensajes informativos al usuario.</li>
+ * </ul>
+ *
+ * Esta ventana extiende de `JFrame` y se muestra de forma independiente del resto del sistema.
+ *
+ * @author Juliana Torres
+ * @version 1.0
+ */
+
 package ec.edu.ups.vista;
 
 import ec.edu.ups.modelo.PreguntaSeguridad;

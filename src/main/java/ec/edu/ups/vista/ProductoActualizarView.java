@@ -1,3 +1,29 @@
+/**
+ * Vista para actualizar productos existentes en el sistema.
+ *
+ * Esta interfaz permite al usuario:
+ * <ul>
+ *   <li>Buscar productos por su código</li>
+ *   <li>Visualizar productos en una tabla</li>
+ *   <li>Modificar el nombre y el precio de un producto</li>
+ * </ul>
+ *
+ * La vista está diseñada con soporte para internacionalización (i18n),
+ * utilizando un `MensajeInternacionalizacionHandler` para cargar textos
+ * en distintos idiomas.
+ *
+ * Componentes clave:
+ * - `txtCodigo`, `txtNombre`, `txtPrecio`: campos de entrada para datos del producto.
+ * - `btnBuscar`: botón para buscar productos.
+ * - `btnModificar`: botón para aplicar modificaciones.
+ * - `tblProductos`: tabla para mostrar los productos actuales.
+ *
+ * Esta clase extiende `JInternalFrame` y es parte de la interfaz de gestión de productos.
+ *
+ * @author Juliana Torres
+ * @version 1.0
+ */
+
 package ec.edu.ups.vista;
 
 import ec.edu.ups.modelo.Producto;

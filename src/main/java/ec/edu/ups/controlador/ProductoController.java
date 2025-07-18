@@ -9,7 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-
+/**
+ * Controlador que gestiona la lógica relacionada con productos:
+ * creación, búsqueda, actualización, eliminación y visualización.
+ */
 public class ProductoController {
 
     private final ProductoAnadirView productoAnadirView;
@@ -19,6 +22,16 @@ public class ProductoController {
 
     private final ProductoDAO productoDAO;
 
+    /**
+     * Constructor del controlador de productos.
+     *
+     * @param productoDAO DAO que gestiona el almacenamiento de productos.
+     * @param productoAnadirView Vista para añadir productos.
+     * @param productoListaView Vista para listar y buscar productos.
+     * @param carritoAnadirView Vista del carrito (no usada directamente aquí).
+     * @param productoActualizarView Vista para actualizar productos.
+     * @param productoEliminarView Vista para eliminar productos.
+     */
     public ProductoController(ProductoDAO productoDAO,
                               ProductoAnadirView productoAnadirView,
                               ProductoListaView productoListaView,
@@ -34,6 +47,9 @@ public class ProductoController {
         this.configurarEventosEnVistas();
     }
 
+    /**
+     * Configura los eventos de los botones de todas las vistas relacionadas con productos.
+     */
     private void configurarEventosEnVistas() {
         productoAnadirView.getBtnAceptar().addActionListener(new ActionListener() {
             @Override
@@ -55,7 +71,6 @@ public class ProductoController {
                 listarProductos();
             }
         });
-
 
         productoActualizarView.getBtnBuscar().addActionListener(new ActionListener() {
             @Override
@@ -83,6 +98,9 @@ public class ProductoController {
         configurarSeleccionTablaEliminar();
     }
 
+    /**
+     * Guarda un nuevo producto a partir de los datos ingresados en la vista.
+     */
     private void guardarProducto() {
         int codigo = Integer.parseInt(productoAnadirView.getTxtCodigo().getText());
         String nombre = productoAnadirView.getTxtNombre().getText();
@@ -94,19 +112,26 @@ public class ProductoController {
         productoAnadirView.mostrarProductos(productoDAO.listarTodos());
     }
 
+    /**
+     * Busca productos por nombre y los muestra en la vista de lista.
+     */
     private void buscarProducto() {
         String nombre = productoListaView.getTxtBuscar().getText();
-
         List<Producto> productosEncontrados = productoDAO.buscarPorNombre(nombre);
         productoListaView.cargarDatos(productosEncontrados);
     }
 
+    /**
+     * Lista todos los productos registrados y los muestra en la vista correspondiente.
+     */
     private void listarProductos() {
         List<Producto> productos = productoDAO.listarTodos();
         productoListaView.cargarDatos(productos);
     }
 
-
+    /**
+     * Busca un producto por su código y lo muestra en la tabla de la vista de actualización.
+     */
     private void buscarYMostrarProductoEnTabla() {
         int codigo = Integer.parseInt(productoActualizarView.getTxtCodigo().getText());
         Producto producto = productoDAO.buscarPorCodigo(codigo);
@@ -126,6 +151,9 @@ public class ProductoController {
         }
     }
 
+    /**
+     * Actualiza la información de un producto con los datos ingresados.
+     */
     private void actualizarProducto() {
         try {
             int codigo = Integer.parseInt(productoActualizarView.getTxtCodigo().getText());
@@ -136,9 +164,7 @@ public class ProductoController {
             productoDAO.actualizar(productoActualizado);
 
             productoActualizarView.mostrarMensaje("Producto actualizado correctamente");
-
             productoActualizarView.cargarDatos(productoDAO.listarTodos());
-
             productoListaView.cargarDatos(productoDAO.listarTodos());
 
         } catch (NumberFormatException e) {
@@ -148,6 +174,9 @@ public class ProductoController {
         }
     }
 
+    /**
+     * Busca productos por nombre y los carga en la tabla de la vista de eliminación.
+     */
     private void buscarProductoParaEliminar() {
         String nombre = productoEliminarView.getTxtNombre().getText();
         List<Producto> productos = productoDAO.buscarPorNombre(nombre);
@@ -168,6 +197,9 @@ public class ProductoController {
         }
     }
 
+    /**
+     * Configura el comportamiento al seleccionar una fila en la tabla de eliminación.
+     */
     private void configurarSeleccionTablaEliminar() {
         productoEliminarView.getTblProductos().getSelectionModel().addListSelectionListener(e -> {
             int fila = productoEliminarView.getTblProductos().getSelectedRow();
@@ -183,6 +215,9 @@ public class ProductoController {
         });
     }
 
+    /**
+     * Elimina el producto actualmente seleccionado en la tabla de la vista de eliminación.
+     */
     private void eliminarProductoSeleccionado() {
         try {
             int codigo = Integer.parseInt(productoEliminarView.getTextField1().getText());
@@ -211,7 +246,5 @@ public class ProductoController {
             JOptionPane.showMessageDialog(productoEliminarView, "Ingrese un código válido.");
         }
     }
-
-
 
 }

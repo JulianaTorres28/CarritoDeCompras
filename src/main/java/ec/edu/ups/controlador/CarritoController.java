@@ -13,6 +13,10 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Controlador encargado de manejar la lógica del carrito de compras.
+ * Gestiona la interacción entre la vista, el modelo y los DAOs relacionados.
+ */
 public class CarritoController {
 
     private final CarritoDAO carritoDAO;
@@ -23,6 +27,15 @@ public class CarritoController {
 
     private Carrito carrito;
 
+    /**
+     * Constructor del controlador de carrito de compras.
+     *
+     * @param carritoDAO           DAO para la gestión de carritos.
+     * @param productoDAO          DAO para la gestión de productos.
+     * @param carritoAnadirView    Vista para añadir productos al carrito.
+     * @param carritoListaView     Vista para listar carritos.
+     * @param usuarioAutenticado   Usuario autenticado en sesión.
+     */
     public CarritoController(
             CarritoDAO carritoDAO,
             ProductoDAO productoDAO,
@@ -42,6 +55,9 @@ public class CarritoController {
         configurarEventosEnVistas();
     }
 
+    /**
+     * Asocia los eventos de los botones de las vistas con las funciones del controlador.
+     */
     private void configurarEventosEnVistas() {
         carritoAnadirView.getBtnAnadir().addActionListener(e -> anadirProducto());
         carritoAnadirView.getBtnGuardar().addActionListener(e -> guardarCarrito());
@@ -56,6 +72,9 @@ public class CarritoController {
         });
     }
 
+    /**
+     * Añade un producto al carrito a partir del código ingresado y la cantidad seleccionada.
+     */
     private void anadirProducto() {
         int codigo = Integer.parseInt(carritoAnadirView.getTxtCodigo().getText());
         Producto producto = productoDAO.buscarPorCodigo(codigo);
@@ -72,6 +91,9 @@ public class CarritoController {
         mostrarTotales();
     }
 
+    /**
+     * Guarda el carrito actual en la base de datos y reinicia el formulario.
+     */
     private void guardarCarrito() {
         carrito.setUsuario(usuarioAutenticado);
         carritoDAO.crear(carrito);
@@ -82,6 +104,9 @@ public class CarritoController {
         mostrarTotales();
     }
 
+    /**
+     * Carga los productos actuales del carrito en la tabla de la vista.
+     */
     private void cargarProductos() {
         Locale locale = carritoAnadirView.getMensajeInternacionalizacion().getLocale();
         var modelo = (javax.swing.table.DefaultTableModel) carritoAnadirView.getTblProductos().getModel();
@@ -98,6 +123,9 @@ public class CarritoController {
         }
     }
 
+    /**
+     * Muestra los valores del subtotal, IVA y total en la vista.
+     */
     private void mostrarTotales() {
         Locale locale = carritoAnadirView.getMensajeInternacionalizacion().getLocale();
         carritoAnadirView.getTxtSubtotal().setText(FormateadorUtils.formatearMoneda(carrito.calcularSubtotal(), locale));
@@ -105,6 +133,11 @@ public class CarritoController {
         carritoAnadirView.getTxtTotal().setText(FormateadorUtils.formatearMoneda(carrito.calcularTotal(), locale));
     }
 
+    /**
+     * Carga la lista de carritos disponibles en la tabla de la vista.
+     * Si el usuario es administrador, muestra todos los carritos.
+     * Si no, solo muestra los del usuario autenticado.
+     */
     private void cargarCarritosEnTabla() {
         List<Carrito> carritos;
 
@@ -120,6 +153,9 @@ public class CarritoController {
         carritoListaView.cargarDatos(carritos, locale);
     }
 
+    /**
+     * Elimina un producto seleccionado del carrito.
+     */
     private void eliminarItem() {
         int fila = carritoAnadirView.getTblProductos().getSelectedRow();
         if (fila >= 0) {
@@ -133,6 +169,9 @@ public class CarritoController {
         }
     }
 
+    /**
+     * Permite modificar la cantidad de un producto ya añadido al carrito.
+     */
     private void actualizarCantidad() {
         int fila = carritoAnadirView.getTblProductos().getSelectedRow();
         if (fila >= 0) {
@@ -150,11 +189,17 @@ public class CarritoController {
         }
     }
 
+    /**
+     * Limpia la tabla de productos en la vista.
+     */
     private void limpiarTablaProductos() {
         var modelo = (javax.swing.table.DefaultTableModel) carritoAnadirView.getTblProductos().getModel();
         modelo.setRowCount(0);
     }
 
+    /**
+     * Busca un producto por su código e imprime su información en la vista.
+     */
     private void buscarProductoPorCodigo() {
         int codigo = Integer.parseInt(carritoAnadirView.getTxtCodigo().getText());
         Producto producto = productoDAO.buscarPorCodigo(codigo);
@@ -166,7 +211,5 @@ public class CarritoController {
             carritoAnadirView.getTxtNombre().setText(producto.getNombre());
             carritoAnadirView.getTxtPrecio().setText(String.valueOf(producto.getPrecio()));
         }
-
     }
-
 }

@@ -1,3 +1,29 @@
+/**
+ * Vista principal de inicio de sesión (Login) del sistema.
+ *
+ * Esta interfaz gráfica permite a los usuarios:
+ * <ul>
+ *   <li>Ingresar sus credenciales (nombre de usuario y contraseña)</li>
+ *   <li>Registrarse en el sistema</li>
+ *   <li>Recuperar su cuenta en caso de olvido de contraseña</li>
+ *   <li>Seleccionar el idioma de la interfaz (Español, Inglés, Francés)</li>
+ * </ul>
+ *
+ * Integra soporte para internacionalización (i18n) y cambia los textos dinámicamente
+ * según el idioma seleccionado.
+ *
+ * Componentes destacados:
+ * - `txtUsername`: campo para el nombre de usuario
+ * - `txtContrasenia`: campo para la contraseña
+ * - `btnIniciarSesion`, `btnRegistrarse`, `btnRecuperar`: botones de acción
+ * - `cbxIdioma`: selector de idioma
+ *
+ * Esta clase extiende `JFrame` y es la entrada principal al sistema gráfico.
+ *
+ * @author Juliana Torres
+ * @version 1.0
+ */
+
 package ec.edu.ups.vista;
 
 import ec.edu.ups.util.MensajeInternacionalizacionHandler;
@@ -30,7 +56,11 @@ public class LoginView extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(panelPrincipal);
-        
+
+        btnIniciarSesion.setIcon(new ImageIcon(getClass().getResource("/iconos/login.png")));
+        btnRegistrarse.setIcon(new ImageIcon(getClass().getResource("/iconos/register.png")));
+        btnRecuperar.setIcon(new ImageIcon(getClass().getResource("/iconos/forgot_password.png")));
+
         cbxIdioma.addItem("Español");
         cbxIdioma.addItem("English");
         cbxIdioma.addItem("Français");

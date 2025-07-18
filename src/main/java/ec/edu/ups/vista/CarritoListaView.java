@@ -1,3 +1,24 @@
+/**
+ * Ventana interna que muestra la lista de carritos de compras registrados.
+ * Permite al usuario listar todos los carritos almacenados y visualizar:
+ * <ul>
+ *     <li>Código del carrito</li>
+ *     <li>Fecha de creación</li>
+ *     <li>Subtotal</li>
+ *     <li>IVA</li>
+ *     <li>Total</li>
+ *     <li>Usuario que creó el carrito</li>
+ * </ul>
+ *
+ * Integra soporte de internacionalización e incluye formato de fecha y moneda
+ * según la configuración regional establecida en la aplicación.
+ *
+ * Esta vista es útil para administración y seguimiento de las compras realizadas.
+ *
+ * @author Juliana Torres
+ * @version 1.0
+ */
+
 package ec.edu.ups.vista;
 
 import ec.edu.ups.modelo.Carrito;

@@ -1,3 +1,25 @@
+/**
+ * Vista para añadir nuevos productos al sistema.
+ *
+ * Esta clase proporciona una interfaz gráfica que permite al usuario:
+ * <ul>
+ *   <li>Ingresar un nuevo producto con su código, nombre y precio.</li>
+ *   <li>Limpiar los campos del formulario.</li>
+ *   <li>Internacionalizar todos los textos mostrados según el idioma seleccionado.</li>
+ * </ul>
+ *
+ * Componentes principales:
+ * - Campos de texto: `txtCodigo`, `txtNombre`, `txtPrecio`
+ * - Botones: `btnAceptar`, `btnLimpiar`
+ * - Etiquetas: `lblCodigo`, `lblNombre`, `lblPrecio`
+ * - Soporte para múltiples idiomas mediante `MensajeInternacionalizacionHandler`
+ *
+ * Esta clase hereda de `JInternalFrame`, lo que permite que sea utilizada dentro de un `JDesktopPane`.
+ *
+ * @author Juliana Torres
+ * @version 1.0
+ */
+
 package ec.edu.ups.vista;
 
 import ec.edu.ups.modelo.Producto;

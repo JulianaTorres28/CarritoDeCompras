@@ -1,3 +1,30 @@
+/**
+ * Vista gráfica para la eliminación de productos del sistema.
+ *
+ * Esta clase proporciona una interfaz de usuario que permite:
+ * <ul>
+ *   <li>Buscar un producto por su nombre.</li>
+ *   <li>Visualizar la información del producto a eliminar.</li>
+ *   <li>Eliminar productos del sistema.</li>
+ *   <li>Ver una tabla con los productos disponibles.</li>
+ * </ul>
+ *
+ * Funcionalidades adicionales:
+ * - Soporte para múltiples idiomas mediante `MensajeInternacionalizacionHandler`.
+ * - Presentación de los datos en una tabla interactiva (`JTable`) con encabezados dinámicos.
+ *
+ * Componentes principales:
+ * - Campos de texto: `txtNombre`, `textField1`, `textField2`, `textField3`
+ * - Etiquetas: `lblNombre`, `lblCodigo`, `lblPrecio`, `lbNombre`
+ * - Botones: `btnBuscar`, `btnEliminar`
+ * - Tabla de productos: `tblProductos`
+ *
+ * Extiende de `JInternalFrame` para integrarse en un `JDesktopPane`.
+ *
+ * @author Juliana Torres
+ * @version 1.0
+ */
+
 package ec.edu.ups.vista;
 
 import ec.edu.ups.util.MensajeInternacionalizacionHandler;

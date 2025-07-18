@@ -1,3 +1,29 @@
+/**
+ * Vista gráfica para listar y buscar productos registrados en el sistema.
+ *
+ * Esta clase permite:
+ * <ul>
+ *   <li>Visualizar una tabla con todos los productos disponibles.</li>
+ *   <li>Buscar productos por nombre o criterio ingresado.</li>
+ *   <li>Cambiar dinámicamente los textos mediante soporte de internacionalización.</li>
+ * </ul>
+ *
+ * Componentes gráficos principales:
+ * - `txtBuscar`: Campo para ingresar el criterio de búsqueda.
+ * - `btnBuscar`: Botón para ejecutar la búsqueda.
+ * - `btnListar`: Botón para mostrar todos los productos.
+ * - `tblProductos`: Tabla donde se muestra el listado de productos.
+ * - `lblNombre`: Etiqueta descriptiva del campo de búsqueda.
+ *
+ * Utiliza `MensajeInternacionalizacionHandler` para adaptar la interfaz gráfica
+ * al idioma seleccionado por el usuario.
+ *
+ * Extiende de `JInternalFrame`, lo cual permite integrar esta vista en un `JDesktopPane`.
+ *
+ * @author Juliana Torres
+ * @version 1.0
+ */
+
 package ec.edu.ups.vista;
 
 import ec.edu.ups.modelo.Producto;
