@@ -1,19 +1,32 @@
 package ec.edu.ups.modelo;
 
+import java.io.Serializable;
+
 /**
  * Clase que representa una pregunta de seguridad junto con su respuesta.
- * Estas preguntas son utilizadas como mecanismo de verificación para recuperación de cuenta.
+ * <p>
+ * Estas preguntas son utilizadas como mecanismo de verificación de identidad,
+ * especialmente en procesos de recuperación de cuenta o autenticación secundaria.
+ * </p>
+ *
+ * <p>Implementa {@link Serializable} para permitir su almacenamiento en archivos binarios.</p>
+ *
  */
-public class PreguntaSeguridad {
+public class PreguntaSeguridad implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
+    /** Enunciado de la pregunta de seguridad. */
     private String pregunta;
+
+    /** Respuesta proporcionada por el usuario para esta pregunta. */
     private String respuesta;
 
     /**
-     * Constructor que inicializa la pregunta de seguridad con su respuesta.
+     * Constructor que inicializa la pregunta de seguridad con su respectiva respuesta.
      *
-     * @param pregunta la pregunta de seguridad (por ejemplo, "¿Nombre de tu mascota?")
-     * @param respuesta la respuesta correspondiente a la pregunta
+     * @param pregunta enunciado de la pregunta (por ejemplo, "¿Nombre de tu primera mascota?")
+     * @param respuesta respuesta correspondiente a la pregunta planteada
      */
     public PreguntaSeguridad(String pregunta, String respuesta) {
         this.pregunta = pregunta;
@@ -23,16 +36,16 @@ public class PreguntaSeguridad {
     /**
      * Obtiene la pregunta de seguridad.
      *
-     * @return la pregunta
+     * @return una cadena con la pregunta
      */
     public String getPregunta() {
         return pregunta;
     }
 
     /**
-     * Obtiene la respuesta a la pregunta de seguridad.
+     * Obtiene la respuesta asociada a la pregunta de seguridad.
      *
-     * @return la respuesta
+     * @return una cadena con la respuesta
      */
     public String getRespuesta() {
         return respuesta;

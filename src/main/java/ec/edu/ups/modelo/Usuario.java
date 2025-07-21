@@ -1,13 +1,23 @@
 package ec.edu.ups.modelo;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
- * Clase que representa un usuario del sistema, con sus credenciales, rol y preguntas de seguridad asociadas.
+ * Clase que representa un usuario del sistema.
+ * <p>
+ * Cada usuario tiene credenciales de acceso, un rol que define sus permisos
+ * y un conjunto de preguntas de seguridad asociadas para recuperación de cuenta.
+ * </p>
+ *
+ * <p>Implementa {@link Serializable} para permitir persistencia en archivos o transmisión por red.</p>
+ *
  */
-public class Usuario {
+public class Usuario implements Serializable {
 
-    /** Nombre de usuario (único) utilizado para autenticación. */
+    private static final long serialVersionUID = 1L;
+
+    /** Nombre de usuario único utilizado para autenticación. */
     private String username;
 
     /** Contraseña del usuario. */
@@ -16,25 +26,26 @@ public class Usuario {
     /** Cédula de identidad del usuario. */
     private String cedula;
 
-    /** Rol que define los permisos del usuario dentro del sistema. */
+    /** Rol asignado al usuario (ADMIN, CLIENTE, etc.). */
     private Rol rol;
 
-    /** Lista de preguntas de seguridad asociadas al usuario. */
+    /** Lista de preguntas de seguridad utilizadas para recuperación de cuenta. */
     private List<PreguntaSeguridad> preguntasSeguridad;
 
     /**
      * Constructor por defecto.
+     * <p>Requerido para serialización, frameworks o instanciación sin datos iniciales.</p>
      */
     public Usuario() {
     }
 
     /**
-     * Constructor que inicializa los campos principales del usuario.
+     * Constructor que inicializa un usuario con sus datos básicos.
      *
-     * @param nombreDeUsuario Nombre de usuario.
-     * @param contrasenia     Contraseña.
+     * @param nombreDeUsuario Nombre de usuario único.
+     * @param contrasenia     Contraseña segura.
      * @param cedula          Cédula de identidad.
-     * @param rol             Rol asignado al usuario.
+     * @param rol             Rol asignado dentro del sistema.
      */
     public Usuario(String nombreDeUsuario, String contrasenia, String cedula, Rol rol) {
         this.username = nombreDeUsuario;
@@ -44,9 +55,9 @@ public class Usuario {
     }
 
     /**
-     * Obtiene la lista de preguntas de seguridad.
+     * Devuelve la lista de preguntas de seguridad.
      *
-     * @return Lista de preguntas de seguridad.
+     * @return lista de preguntas con sus respuestas.
      */
     public List<PreguntaSeguridad> getPreguntasSeguridad() {
         return preguntasSeguridad;
@@ -55,7 +66,7 @@ public class Usuario {
     /**
      * Establece la lista de preguntas de seguridad.
      *
-     * @param preguntasSeguridad Lista de preguntas.
+     * @param preguntasSeguridad lista de preguntas/respuestas asociadas.
      */
     public void setPreguntasSeguridad(List<PreguntaSeguridad> preguntasSeguridad) {
         this.preguntasSeguridad = preguntasSeguridad;
@@ -64,7 +75,7 @@ public class Usuario {
     /**
      * Obtiene el nombre de usuario.
      *
-     * @return Nombre de usuario.
+     * @return username del usuario.
      */
     public String getUsername() {
         return username;
@@ -73,16 +84,16 @@ public class Usuario {
     /**
      * Establece el nombre de usuario.
      *
-     * @param username Nombre de usuario.
+     * @param username nuevo nombre de usuario.
      */
     public void setUsername(String username) {
         this.username = username;
     }
 
     /**
-     * Obtiene la contraseña del usuario.
+     * Devuelve la contraseña del usuario.
      *
-     * @return Contraseña.
+     * @return contraseña.
      */
     public String getContrasenia() {
         return contrasenia;
@@ -91,16 +102,16 @@ public class Usuario {
     /**
      * Establece la contraseña del usuario.
      *
-     * @param contrasenia Contraseña.
+     * @param contrasenia nueva contraseña.
      */
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
 
     /**
-     * Obtiene el rol asignado al usuario.
+     * Obtiene el rol del usuario.
      *
-     * @return Rol.
+     * @return rol del usuario.
      */
     public Rol getRol() {
         return rol;
@@ -109,16 +120,16 @@ public class Usuario {
     /**
      * Establece el rol del usuario.
      *
-     * @param rol Rol.
+     * @param rol nuevo rol.
      */
     public void setRol(Rol rol) {
         this.rol = rol;
     }
 
     /**
-     * Obtiene la cédula del usuario.
+     * Devuelve la cédula del usuario.
      *
-     * @return Cédula.
+     * @return cédula.
      */
     public String getCedula() {
         return cedula;
@@ -127,16 +138,16 @@ public class Usuario {
     /**
      * Establece la cédula del usuario.
      *
-     * @param cedula Cédula.
+     * @param cedula nueva cédula.
      */
     public void setCedula(String cedula) {
         this.cedula = cedula;
     }
 
     /**
-     * Devuelve una representación en texto del objeto Usuario.
+     * Representación textual del objeto Usuario.
      *
-     * @return Cadena con los datos del usuario.
+     * @return cadena con información relevante del usuario.
      */
     @Override
     public String toString() {

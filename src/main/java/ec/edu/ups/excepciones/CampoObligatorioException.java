@@ -1,4 +1,4 @@
-package ec.edu.ups.util;
+package ec.edu.ups.excepciones;
 
 /**
  * Excepción personalizada que se lanza cuando un campo obligatorio no ha sido proporcionado.
