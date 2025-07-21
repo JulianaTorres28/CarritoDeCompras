@@ -1,4 +1,4 @@
-package ec.edu.ups.util;
+package ec.edu.ups.excepciones;
 
 /**
  * Excepción personalizada utilizada para indicar que un formato de entrada es inválido.

@@ -1,4 +1,4 @@
-package ec.edu.ups.util;
+package ec.edu.ups.excepciones;
 
 /**
  * Clase utilitaria para validar números de cédula ecuatoriana.

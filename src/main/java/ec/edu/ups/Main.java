@@ -44,9 +44,10 @@ public class Main {
 
             MensajeInternacionalizacionHandler mensajeHandler = new MensajeInternacionalizacionHandler("es", "EC");
 
-            // DAOs
-            UsuarioDAO usuarioDAO = new UsuarioDAOTexto("usuarios.txt");
-            PreguntaSeguridadDAO preguntaSeguridadDAO = new PreguntaSeguridadDAOMemoria();
+            UsuarioDAO usuarioDAO = new UsuarioDAOBinario("usuarios.dat");
+            PreguntaSeguridadDAO preguntaSeguridadDAO = new PreguntaSeguridadDAOTexto("preguntas_seguridad.txt");
+            ProductoDAO productoDAO = new ProductoDAOBinario("productos.dat");
+            CarritoDAO carritoDAO = new CarritoDAOTexto("carritos.txt");
 
             // Vistas
             LoginView loginView = new LoginView(mensajeHandler);
@@ -69,12 +70,8 @@ public class Main {
             loginView.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-
                     Usuario usuarioAutenticado = usuarioController.getUsuarioAutenticado();
                     if (usuarioAutenticado != null) {
-
-                        ProductoDAO productoDAO = new ProductoDAOMemoria();
-                        CarritoDAO carritoDAO = new CarritoDAOMemoria();
 
                         MenuPrincipalView principalView = new MenuPrincipalView(mensajeHandler);
                         ProductoAnadirView productoAnadirView = new ProductoAnadirView(mensajeHandler);

@@ -1,17 +1,35 @@
 package ec.edu.ups.modelo;
 
+import java.io.Serializable;
+
 /**
  * Clase que representa un producto disponible en el sistema.
- * Contiene información como el código, nombre y precio del producto.
+ * <p>
+ * Cada producto cuenta con un código único, un nombre descriptivo y un precio.
+ * Esta clase es fundamental para las operaciones de venta, inventario y carrito de compras.
+ * </p>
+ *
+ * <p>Implementa {@link Serializable} para permitir su almacenamiento en archivos binarios o transferencia en redes.</p>
+ *
  */
-public class Producto {
+public class Producto implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
+    /** Código único del producto. */
     private int codigo;
+
+    /** Nombre o descripción del producto. */
     private String nombre;
+
+    /** Precio del producto. */
     private double precio;
 
     /**
-     * Constructor vacío para permitir la creación de un objeto Producto sin inicializar sus atributos.
+     * Constructor por defecto.
+     * <p>
+     * Necesario para la deserialización o cuando se desea instanciar sin asignar valores iniciales.
+     * </p>
      */
     public Producto() {
     }
@@ -32,7 +50,7 @@ public class Producto {
     /**
      * Establece el código del producto.
      *
-     * @param codigo el nuevo código
+     * @param codigo nuevo código del producto
      */
     public void setCodigo(int codigo) {
         this.codigo = codigo;
@@ -41,7 +59,7 @@ public class Producto {
     /**
      * Establece el nombre del producto.
      *
-     * @param nombre el nuevo nombre
+     * @param nombre nuevo nombre del producto
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -50,43 +68,44 @@ public class Producto {
     /**
      * Establece el precio del producto.
      *
-     * @param precio el nuevo precio
+     * @param precio nuevo precio del producto
      */
     public void setPrecio(double precio) {
         this.precio = precio;
     }
 
     /**
-     * Devuelve el código del producto.
+     * Obtiene el código del producto.
      *
-     * @return el código
+     * @return código del producto
      */
     public int getCodigo() {
         return codigo;
     }
 
     /**
-     * Devuelve el nombre del producto.
+     * Obtiene el nombre del producto.
      *
-     * @return el nombre
+     * @return nombre del producto
      */
     public String getNombre() {
         return nombre;
     }
 
     /**
-     * Devuelve el precio del producto.
+     * Obtiene el precio del producto.
      *
-     * @return el precio
+     * @return precio del producto
      */
     public double getPrecio() {
         return precio;
     }
 
     /**
-     * Retorna una representación en cadena del producto con su código, nombre y precio.
+     * Retorna una representación textual del producto.
+     * Formato: {@code código - nombre - $precio}
      *
-     * @return una cadena con la información del producto
+     * @return cadena representativa del producto
      */
     @Override
     public String toString() {
